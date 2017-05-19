@@ -10,3 +10,7 @@
 4. Put that password for the Postgres role into your environment: `echo "export URL_SHORTENER_DB_PASSWORD='some_password'" >> ~/.zshrc` (or whatever shell profile is appropriate for your setup).
 5. `bundle exec rails db:create`. You'll probably have Rails shout at you about being unable to create the production DB because of lack of password... which is fine. We just need the Dev and Test dbs for the moment.
 6. Run it up: `bundle exec rails s -p 3001`
+
+## Deployment
+
+Using Heroku, and [the CLI](https://devcenter.heroku.com/articles/heroku-cli).
