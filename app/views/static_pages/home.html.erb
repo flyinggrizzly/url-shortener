@@ -1,3 +1,12 @@
-<h1>Welcome to the new URL Shortener</h1>
+<% provide(:title, "") %>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+  </head>
+  <body>
+    <h1>New URL Shortener</h1>
+    <p>This URL shortener is being built in Rails to replace our current Padrino based too.</p>
+  </body>
+</html>
 
-<p>This app is being developed to replace our current Padrino based URL shortener.</p>
