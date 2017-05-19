@@ -12,4 +12,10 @@
  *
  *= require_tree .
  *= require_self
+ *= require foundation_and_overrides
+
  */
+
+.wrap {
+  padding: 10px;
+}

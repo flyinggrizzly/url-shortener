@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>UrlShortener</title>
-    <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title><%= full_title(yield(:title)) %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="top-bar">
+      <div class="wrap">
+        <section class="top-bar-left">
+          <h1><%= link_to(full_title, '#', id: 'logo') %></h1>
+        </section>
+        <div class="top-bar-right">
+          <nav>
+            <ul class="menu">
+              <li><%= link_to 'Redirects', '#' %></li>
+              <li><%= link_to 'Users',     '#' %></li>
+            </ul>
+          </nav>
+        </div>
+      </div><!-- end .wrap (around header) -->
+    </header>
+    <div class="wrap">
+      <main class="row">
+        <%= yield %>
+      </main><!-- end .row -->
+    </div><!-- end .wrap (around main) -->
   </body>
 </html>
