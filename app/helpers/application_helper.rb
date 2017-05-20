@@ -1,6 +1,6 @@
 module ApplicationHelper
   def full_title(page_title = '')
-    base_title = 'url shortener beta'
+    base_title = 'URL Shortener'
     if page_title.empty?
       base_title
     else

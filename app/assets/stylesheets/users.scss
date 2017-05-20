@@ -12,6 +12,13 @@
 }
 .users {
   margin-top: 50px;
+  ul {
+    list-style: none;
+    margin-left: 0;
+    li {
+      margin-left: none;
+    }
+  }
 }
 .user {
   padding: 20px;

@@ -1,8 +1,10 @@
 <% provide(:title, 'Users') %>
 
 <section class="users">
-  <h2><%= full_title(yield(:title)) %></h2>
-  <ul class="menu vertical">
+  <div class="callout">
+    <%= link_to 'Create a user', new_user_path, class: 'button large expanded' %>
+  </div>
+  <ul class="">
     <%= render @users %>
   </ul>
 </section>
