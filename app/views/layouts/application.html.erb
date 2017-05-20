@@ -32,5 +32,12 @@
         <%= yield %>
       </main><!-- end .row -->
     </div><!-- end .wrap (around main) -->
+    <% if Rails.env.development? %>
+      <div class="row">
+        <div class="column small-10 small-offset-1">
+          <%= debug(params) %>
+        </div>
+      </div><!-- end .row (for debug) -->
+    <% end %>
   </body>
 </html>
