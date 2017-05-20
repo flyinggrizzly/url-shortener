@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+cthulhu:
+  name:  Great Cthulhu
+  email: OG-OldOne@lovecraft.net
+  role:  admin
+
+yig:
+  name:  Yig
+  email: snaketongue@lovecraft.net
+  role:  user
+
+hastur:
+  name:  Hastur
+  email: hasturhasturhastur@lovecraft.net
+  role:  user
