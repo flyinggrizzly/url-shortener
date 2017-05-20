@@ -35,3 +35,13 @@
     }
   }
 }
+.checkbox-container {
+    .input-group-label {
+      span, .checkbox {
+        display: block;
+        float: left;
+        margin-left: 10px;
+        font-size: 1.3rem;
+      }
+    }
+  }
