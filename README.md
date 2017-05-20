@@ -11,8 +11,8 @@
 5. Install all the dependencies:
   1. if this is a new ruby to your system, don't forget `gem install bundler`
   2. `bundle install`
-6. Create the dev and test databases: `bundle exec rails db:create:development && bundle exec rails db:create:test`.
-6. Run it up: `bundle exec rails s -p 3001`; also you can use `./install.sh`
+6. Create the dev and test databases: `bundle exec rails db:create`.
+6. Run it up: `bundle exec rails s -p 3001`; also you can use `./serve.sh`
 
 ## Deployment
 
