@@ -11,6 +11,6 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get user_path(user)
     assert_response :success
     assert_select 'title', full_title(user.name)
-    assert_match "Role: <strong>#{user.role}</strong>", response.body
+    assert_match "Role: <strong>Admin</strong>", response.body
   end
 end

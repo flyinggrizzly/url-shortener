@@ -4,7 +4,7 @@ class UserTest < ActiveSupport::TestCase
   def setup
     @user = User.new(name:                  'Sterling Archer',
                      email:                 'archer@figgis.agency',
-                     role:                  'user',
+                     admin:                  false,
                      password:              'foobarfoobargoof',
                      password_confirmation: 'foobarfoobargoof')
   end
@@ -66,25 +66,6 @@ class UserTest < ActiveSupport::TestCase
     @user.email = mixed_case_email
     @user.save
     assert_equal mixed_case_email.downcase, @user.reload.email
-  end
-
-  test 'role should not be blank' do
-    @user.role = ' '
-    assert_not @user.valid?
-  end
-
-  test 'role should only be admin or user' do
-    @user.role = 'secret_agent'
-    assert_not @user.valid?
-    @user.role = 'admin'
-    assert @user.valid?
-  end
-
-  test 'role should be saved as lowercase' do
-    mixed_case_role = 'ADmIn'
-    @user.role = mixed_case_role
-    @user.save
-    assert_equal mixed_case_role.downcase, @user.reload.role
   end
 
   test 'password should not be blank' do

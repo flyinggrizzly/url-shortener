@@ -3,14 +3,14 @@
 cthulhu:
   name:  Great Cthulhu
   email: OG-OldOne@lovecraft.net
-  role:  admin
+  admin: true
 
 yig:
   name:  Yig
   email: snaketongue@lovecraft.net
-  role:  user
+  admin: false
 
 hastur:
   name:  Hastur
   email: hasturhasturhastur@lovecraft.net
-  role:  user
+  admin: false
