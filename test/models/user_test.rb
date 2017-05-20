@@ -2,7 +2,11 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(name: 'Sterling Archer', email: 'archer@figgis.agency', role: 'user')
+    @user = User.new(name:                  'Sterling Archer',
+                     email:                 'archer@figgis.agency',
+                     role:                  'user',
+                     password:              'foobarfoobargoof',
+                     password_confirmation: 'foobarfoobargoof')
   end
 
   test 'should be valid' do
@@ -62,5 +66,15 @@ class UserTest < ActiveSupport::TestCase
     @user.email = mixed_case_email
     @user.save
     assert_equal mixed_case_email.downcase, @user.reload.email
+  end
+
+  test 'password should not be blank' do
+    @user.password = @user.password_confirmation = ' ' * 16
+    assert_not @user.valid?
+  end
+
+  test 'password should have a minimum length' do
+    @user.password = @user.password_confirmation = 'foobar'
+    assert_not @user.valid?
   end
 end
