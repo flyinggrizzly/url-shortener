@@ -68,6 +68,25 @@ class UserTest < ActiveSupport::TestCase
     assert_equal mixed_case_email.downcase, @user.reload.email
   end
 
+  test 'role should not be blank' do
+    @user.role = ' '
+    assert_not @user.valid?
+  end
+
+  test 'role should only be admin or user' do
+    @user.role = 'secret_agent'
+    assert_not @user.valid?
+    @user.role = 'admin'
+    assert @user.valid?
+  end
+
+  test 'role should be saved as lowercase' do
+    mixed_case_role = 'ADmIn'
+    @user.role = mixed_case_role
+    @user.save
+    assert_equal mixed_case_role.downcase, @user.reload.role
+  end
+
   test 'password should not be blank' do
     @user.password = @user.password_confirmation = ' ' * 16
     assert_not @user.valid?
