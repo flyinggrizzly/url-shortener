@@ -28,6 +28,15 @@
       </div><!-- end .wrap (around header) -->
     </header>
     <div class="wrap">
+      <% unless flash.empty? %>
+        <section id="application-alerts" class="row">
+          <div class="column small-6 small-offset-3">
+            <% flash.each do |message_type, message| %>
+              <%= content_tag(:div, message, class: "callout #{message_type}") %>
+            <% end %>
+          </div>
+        </section>
+      <% end %>
       <main class="row">
         <%= yield %>
       </main><!-- end .row -->
