@@ -1,2 +1,16 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<% provide(:title, 'Log in') %>
+
+<div class="column small-8 small-offset-2 user-form">
+  <h2>Log in</h2>
+  <%= form_for(:session, url: login_path) do |f| %>
+    
+
+    <%= f.label :email %>
+    <%= f.email_field :email, class: 'form-control' %> 
+
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+
+    <%= f.submit 'Log in', class: 'button large' %>
+  <% end %>
+</div><!-- end .column -->

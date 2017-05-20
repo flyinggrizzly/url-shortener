@@ -1,0 +1,20 @@
+<header class="top-bar">
+  <div class="wrap">
+    <section class="top-bar-left">
+      <h1><%= link_to(full_title, root_url, id: 'logo') %></h1>
+    </section>
+    <div class="top-bar-right">
+      <nav>
+        <ul class="menu site_nav">
+          <% if logged_in? %>
+            <li><%= link_to 'Aliases', '#' %></li>
+            <li><%= link_to 'Users',     users_path %></li>
+            <li><%= link_to 'Log out',   logout_path %></li>
+          <% else %>
+            <li><%= link_to 'Log in',    login_path %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </div><!-- end .wrap (around header) -->
+</header>

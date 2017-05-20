@@ -2,15 +2,18 @@
 
 cthulhu:
   name:  Great Cthulhu
-  email: OG-OldOne@lovecraft.net
+  email: og_old_one@lovecraft.net
   admin: true
+  password_digest: <%= User.digest('goofballgoofball') %>
 
 yig:
   name:  Yig
   email: snaketongue@lovecraft.net
   admin: false
+  password_digest: <%= User.digest('goofballgoofball') %>
 
 hastur:
   name:  Hastur
   email: hasturhasturhastur@lovecraft.net
   admin: false
+  password_digest: <%= User.digest('goofballgoofball') %>
