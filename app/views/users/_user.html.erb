@@ -1,0 +1,9 @@
+<li class="user" id="user-<%= user.id %>">
+  <h3><%= user.name %>
+  <h5>Role: <%= user_role(user) %></h5>
+  <h5>Email: <%= user.email %></h5>
+  <ul class="menu">
+    <li><h5><%= link_to 'Redirects', '#' %></h5></li>
+    <li><h5><%= link_to 'Edit', '#' %></h5></li>
+  </ul>
+</li>

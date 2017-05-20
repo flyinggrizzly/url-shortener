@@ -1,6 +1,7 @@
 module UsersHelper
-  def user_role
-    if @user.admin?
+  def user_role(u = nil)
+    u ? user = u : user = @user
+    if user.admin?
       "Admin"
     else
       "User"
