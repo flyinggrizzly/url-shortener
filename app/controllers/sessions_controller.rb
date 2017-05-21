@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action
+
   def new
   end
 
@@ -12,6 +14,10 @@ class SessionsController < ApplicationController
       flash.now[:danger] = 'Could not log in because of an invalid password/email combination.'
       render 'new'
     end
+  end
+
+  def delete
+    @user = current_user
   end
 
   def destroy

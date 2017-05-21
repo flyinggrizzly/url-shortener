@@ -12,7 +12,7 @@
               <li><%= link_to 'Users',     users_path %></li>
             <% end %>
             <li><%= link_to 'My Profile',  user_path(current_user) %></li>
-            <li><%= link_to 'Log out',     logout_path %></li>
+            <li><%= link_to 'Log out', logout_path, controller: :sessions, action: :delete, method: :delete, data: { confirm: 'Log out?' } %></li>
           <% else %>
             <li><%= link_to 'Log in',      login_path %></li>
           <% end %>
