@@ -8,28 +8,31 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails',            '~> 5.1.1'
+gem 'rails',                    '~> 5.1.1'
 # Use postgresql as the database for Active Record
-gem 'pg',               '~> 0.18'
+gem 'pg',                       '~> 0.18'
 # Use bcrypt for passwords and security
-gem 'bcrypt',           '~> 3.1.11'
+gem 'bcrypt',                   '~> 3.1.11'
 # Use Puma as the app server
-gem 'puma',             '~> 3.7'
+gem 'puma',                     '~> 3.7'
 # Use SCSS for stylesheets
-gem 'sass-rails',       '~> 5.0'
+gem 'sass-rails',               '~> 5.0'
 # Use Foundation Rails for layout
-gem 'foundation-rails', '~>6.3'
+gem 'foundation-rails',         '~> 6.3'
+# Pagination with will_paginate
+gem 'will_paginate',            '~> 3.1.0'
+gem 'will_paginate-foundation', '~> 6.2.0'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier',         '>= 1.3.0'
+gem 'uglifier',                 '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails',     '~> 4.2'
+gem 'coffee-rails',              '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks',       '~> 5'
+gem 'turbolinks',                '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder',         '~> 2.5'
+gem 'jbuilder',                  '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 
@@ -46,6 +49,7 @@ group :development, :test do
   gem 'minitest-reporters',       '~> 1.1.9'
   gem 'guard',                    '~> 2.13.0'
   gem 'guard-minitest',           '~> 2.4.4'
+  gem 'faker',                    '~> 1.6.6'
 end
 
 group :development do

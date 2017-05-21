@@ -1,10 +1,15 @@
 <% provide(:title, 'Users') %>
 
-<section class="users">
-  <div class="callout">
-    <%= link_to 'Create a user', new_user_path, class: 'button large expanded' %>
-  </div>
-  <ul class="">
-    <%= render @users %>
+<div class="callout">
+  <%= link_to 'Create a user', new_user_path, class: 'button large expanded' %>
+</div>
+<section class="users column">
+  
+  <%= will_paginate class: 'text-center pagination' %>
+  <ul>
+    <% @users.each do |user| %>
+      <%= render partial: user, user: user %>
+    <% end %>
   </ul>
+  <%= will_paginate class: 'text-center pagination' %>
 </section>
