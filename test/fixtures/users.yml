@@ -17,3 +17,11 @@ hastur:
   email: hasturhasturhastur@lovecraft.net
   admin: false
   password_digest: <%= User.digest('goofballgoofball') %>
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  name:  <%= "Cultist #{n}" %>
+  email: <%= "cultist-#{n}@weworshipgreatcthul.hu" %>
+  admin: false
+  password_digest: <%= User.digest('goofballgoofball') %>
+<% end %>

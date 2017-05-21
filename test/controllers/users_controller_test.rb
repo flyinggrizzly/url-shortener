@@ -87,4 +87,23 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert flash.empty?
     assert_redirected_to root_url
   end
+
+  test 'non admins cannot edit admin attribute' do
+    log_in_as(@user)
+    assert_not @user.admin?
+    patch user_path(@user), params: { user: { password:              'goofballgoofball',
+                                              password_confirmation: 'goofballgoofball',
+                                              admin:                 true } }
+    assert_not @user.admin?
+  end
+
+  test 'admins can edit admin attribute' do
+    log_in_as(@admin)
+    assert @admin.admin?
+    patch user_path(@user), params: { user: { password:              'goofballgoofball',
+                                              password_confirmation: 'goofballgoofball',
+                                              admin:                 true } }
+    @user.reload
+    assert @user.admin?
+  end
 end

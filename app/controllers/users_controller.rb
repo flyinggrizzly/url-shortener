@@ -46,9 +46,18 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email,
-                                 :password,
-                                 :password_confirmation)
+    if current_user.admin?
+      params.require(:user).permit(:name,
+                                   :email,
+                                   :admin,
+                                   :password,
+                                   :password_confirmation)
+    else
+      params.require(:user).permit(:name,
+                                   :email,
+                                   :password,
+                                   :password_confirmation)
+    end
   end
 
   ###### Filters ######################################################################################################
@@ -63,6 +72,6 @@ class UsersController < ApplicationController
 
   def correct_or_admin_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+    redirect_to(root_url) unless current_user?(@user) || current_user.admin?
   end
 end
