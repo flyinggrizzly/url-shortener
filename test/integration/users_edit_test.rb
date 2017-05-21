@@ -35,4 +35,15 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_equal name, @user.name
     assert_equal email, @user.email
   end
+
+  test 'edit screen has right fields' do
+    log_in_as(@admin)
+    get edit_user_path(@admin)
+    assert_template 'users/edit'
+    assert_select 'input[name=?]', 'user[name]'
+    assert_select 'input[name=?]', 'user[email]'
+    assert_select 'input[name=?]', 'user[password]'
+    assert_select 'input[name=?]', 'user[password_confirmation]'
+    assert_select 'input[name=?]', 'user[admin]'
+  end
 end

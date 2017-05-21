@@ -5,7 +5,7 @@ class UserCreationTest < ActionDispatch::IntegrationTest
   def setup
     @admin = users(:cthulhu)
     log_in_as(@admin)
-    
+
     @good_params = { name:                  'Cheryl',
                      email:                 'kristall@figgis.agency',
                      password:              'tunt4eva-cherlene-rocks',
@@ -34,5 +34,16 @@ class UserCreationTest < ActionDispatch::IntegrationTest
     assert_redirected_to users_path
     follow_redirect!
     assert_match "#{@good_params['name']} was created successfully.", response.body
+  end
+
+  test 'creation screen has right fields' do
+    log_in_as(@admin)
+    get new_user_path
+    assert_template 'users/new'
+    assert_select 'input[name=?]', 'user[name]'
+    assert_select 'input[name=?]', 'user[email]'
+    assert_select 'input[name=?]', 'user[password]'
+    assert_select 'input[name=?]', 'user[password_confirmation]'
+    assert_select 'input[name=?]', 'user[admin]'
   end
 end
