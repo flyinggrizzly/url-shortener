@@ -30,7 +30,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     # Check nav has right elements
     assert_select 'a[href=?]', logout_path
     # assert_select 'a[href=?]', aliases_path
-    assert_select 'a[href=?]', users_path
+    assert_select 'a[href=?]', user_path(@user)
   end
 
   test 'logout should work' do

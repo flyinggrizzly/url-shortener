@@ -1,9 +1,12 @@
 <li class="user" id="user-<%= user.id %>">
-  <h3><%= user.name %></h3>
+  <h3><%= link_to "#{user.name}", user_path(user) %></h3>
   <h5>Role: <%= user_role(user) %></h5>
   <h5>Email: <%= user.email %></h5>
   <ul class="menu">
     <li><h5><%= link_to 'Redirects', '#' %></h5></li>
     <li><h5><%= link_to 'Edit',      edit_user_path(user) %></h5></li>
+    <% if current_user.admin? && !current_user?(user) %>
+      <li><h5><%= link_to 'Delete', [:delete, user], method: :delete, data: { confirm: 'Are you sure?' } %></h5></li>
+    <% end %>
   </ul>
 </li>

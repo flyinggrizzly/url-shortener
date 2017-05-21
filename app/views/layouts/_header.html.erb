@@ -8,10 +8,13 @@
         <ul class="menu site_nav">
           <% if logged_in? %>
             <li><%= link_to 'Aliases', '#' %></li>
-            <li><%= link_to 'Users',     users_path %></li>
-            <li><%= link_to 'Log out',   logout_path %></li>
+            <% if current_user.admin? %>
+              <li><%= link_to 'Users',     users_path %></li>
+            <% end %>
+            <li><%= link_to 'My Profile',  user_path(current_user) %></li>
+            <li><%= link_to 'Log out',     logout_path %></li>
           <% else %>
-            <li><%= link_to 'Log in',    login_path %></li>
+            <li><%= link_to 'Log in',      login_path %></li>
           <% end %>
         </ul>
       </nav>

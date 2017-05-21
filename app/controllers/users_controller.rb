@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user
-  before_action :correct_or_admin_user, only: [:edit, :update]
-  # before_action :admin_user, only: [:new, :create, :index, :show, :edit, :update, :destroy, :delete]
+  before_action :correct_or_admin_user, only: [:show, :edit, :update]
+  before_action :admin_user, only: [:new, :create, :index, :destroy, :delete]
 
   def new
     @user = User.new
@@ -39,9 +39,18 @@ class UsersController < ApplicationController
     end
   end
 
-  def delete; end
+  # Non-RESTtful resource. Provides a non-JS fall-back for the destroy action.
+  # For source and details see RailsCast 77 revised:
+  # http://railscasts.com/episodes/77-destroy-without-javascript-revised?autoplay=true
+  def delete
+    @user = User.find(params[:id])
+  end
 
-  def destroy; end
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = 'User deleted.'
+    redirect_to users_url
+  end
 
   private
 
@@ -68,6 +77,10 @@ class UsersController < ApplicationController
       flash[:danger] = 'Please log in.'
       redirect_to login_url
     end
+  end
+
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
   end
 
   def correct_or_admin_user
