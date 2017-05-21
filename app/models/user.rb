@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   # Password validations
   has_secure_password
-  validates :password, presence: true, length: { minimum: 16 }
+  validates :password, presence: true, length: { minimum: 16 }, allow_nil: true
 
   ###### Class methods ################################################################################################
 
