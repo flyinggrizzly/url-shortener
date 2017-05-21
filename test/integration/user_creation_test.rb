@@ -3,14 +3,17 @@ require 'test_helper'
 class UserCreationTest < ActionDispatch::IntegrationTest
 
   def setup
+    @admin = users(:cthulhu)
+    log_in_as(@admin)
+    
     @good_params = { name:                  'Cheryl',
-                                         email:                 'kristall@figgis.agency',
-                                         password:              'tunt4eva-cherlene-rocks',
-                                         password_confirmation: 'tunt4eva-cherlene-rocks' }
+                     email:                 'kristall@figgis.agency',
+                     password:              'tunt4eva-cherlene-rocks',
+                     password_confirmation: 'tunt4eva-cherlene-rocks' }
     @bad_params  = { name:                  ' ',
-                                         email:                 'foo@bar,com',
-                                         password:              'foobar',
-                                         password_confirmation: 'fooba' }
+                     email:                 'foo@bar,com',
+                     password:              'foobar',
+                     password_confirmation: 'fooba' }
   end
 
   test 'invalid user info should not be accepted' do

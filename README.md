@@ -17,3 +17,9 @@
 ## Deployment
 
 Using Heroku, and [the CLI](https://devcenter.heroku.com/articles/heroku-cli).
+
+## Notes
+
+This is currently being built so that only registered users can see other users... and the only way to crate users is to have an admin do so.
+
+To change this, first, mess around with the `before_action` filters in `users_controller.rb`, then make sure that the layouts are exposing the right forms/links.
