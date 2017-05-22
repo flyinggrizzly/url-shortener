@@ -41,3 +41,7 @@ To change this, first, mess around with the `before_action` filters in `users_co
   - [ ] most popular short URLs
   - [ ] source of traffic
 - [ ] clean up layouts so they're more consistent with columns
+
+## License
+
+(C) 2017 Sean Moran-Richards/Flying Grizzly. Licensed under the [MIT License](https://mit-license.org/).
