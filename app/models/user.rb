@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 16 }, allow_nil: true
 
+  has_many :short_urls
+
   ###### Class methods ################################################################################################
 
   class << self

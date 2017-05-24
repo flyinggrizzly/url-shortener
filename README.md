@@ -12,7 +12,16 @@
   1. if this is a new ruby to your system, don't forget `gem install bundler`
   2. `bundle install`
 6. Create the dev and test databases: `bundle exec rails db:create`.
-6. Run it up: `bundle exec rails s -p 3001`; also you can use `./serve.sh`
+7. Run it up: `bundle exec rails s -p 3001`; also you can use `./serve.sh`
+
+### Troubleshooting
+
+If you run into an issue where PostgreSQL shouts at you about some ForeignKeyViolation or something, it seems it's because ActiveRecord disables foreign key insertion before running tests. Easiest solution is to run:
+
+1. `sudo -u postgres psql`
+2. `psql$ alter role url_shortener_user superuser;`
+
+Credits to [this post](http://www.42.mach7x.com/2016/05/19/activerecordinvalidforeignkey-pgforeignkeyviolation-error/)
 
 ## Deployment
 

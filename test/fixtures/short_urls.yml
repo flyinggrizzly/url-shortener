@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+example:
+  url_alias: 'example'
+  redirect:  'http://www.example.com'
+  user:      cthulhu
+
+google:
+  url_alias: 'google'
+  redirect:  'http://www.google.com'
+  user:      yig
+
+example-secure:
+  url_alias: 'example-secure'
+  redirect:  'https://www.example.com'
+  user:      cthulhu
+
+google-secure:
+  url_alias: 'google-secure'
+  redirect:  'https://www.google.com'
+  user:      hastur
+
+example-no-scheme:
+  url_alias: 'example-no-scheme'
+  redirect:  'www.example.com'
+  user:      cthulhu
+
+google-no-scheme:
+  url_alias: 'google-no-scheme'
+  redirect:  'www.google.com'
+  user:      yig
+
+google-no-sub:
+  url_alias: 'google-no-sub'
+  redirect:  'http://google.com'
+  user:      hastur
+
+google-no-sub-no-scheme:
+  url_alias: 'no-sub-no-scheme'
+  redirect:  'google.com'
+  user:      cthulhu
