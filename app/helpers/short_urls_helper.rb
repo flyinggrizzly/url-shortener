@@ -1,0 +1,2 @@
+module ShortUrlsHelper
+end

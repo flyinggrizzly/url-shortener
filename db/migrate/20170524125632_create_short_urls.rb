@@ -3,7 +3,7 @@ class CreateShortUrls < ActiveRecord::Migration[5.1]
     create_table :short_urls do |t|
       t.string     :url_alias
       t.text       :redirect
-      t.references :user, foreign_key: true
+      t.references :user, dependent: :nullify # Don't want to delete any aliases if we delete the user that created them.
 
       t.timestamps
     end

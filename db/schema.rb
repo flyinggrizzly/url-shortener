@@ -36,5 +36,4 @@ ActiveRecord::Schema.define(version: 20170524125632) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "short_urls", "users"
 end
