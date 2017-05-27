@@ -1,0 +1,3 @@
+class UrlAliasRequestsController < ApplicationController
+  
+end

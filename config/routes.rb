@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
 
-  resources :users
-  resources :short_urls
-  
+  scope '/admin' do
+    resources :users
+    resources :short_urls
+  end
+
   get     '/login',  to: 'sessions#new'
   post    '/login',  to: 'sessions#create'
   delete  '/logout', to: 'sessions#destroy'
