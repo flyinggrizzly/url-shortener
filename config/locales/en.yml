@@ -34,8 +34,11 @@ en:
     errors:
       messages:
         url_format: "'%{value}' is not a valid URL"
+        slug_format: "'%{value}' is not available as a short URL slug."
       models:
         short_url:
           attributes:
             redirect:
               url_format: "'%{value}' is not a valid URL"
+            slug:
+              slug_format: "'%{value}' is not available as a short URL slug."
