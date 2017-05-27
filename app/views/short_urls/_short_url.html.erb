@@ -1,0 +1,8 @@
+<li class="short_url" id="short_url-<%= short_url.id %>">
+  <h3><%= short_url.url_alias %></h3>
+  <p>Redirects to <%= link_to short_url.redirect, short_url.redirect %>.</p>
+  <ul class="short_url--edit menu">
+    <li><%= link_to 'Edit', '#', class: 'button' %></li>
+    <li><%= link_to 'Delete', '#', class: 'button alert' %></li>
+  </ul>
+</li>

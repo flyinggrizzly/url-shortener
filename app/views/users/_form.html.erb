@@ -1,5 +1,5 @@
 <%= form_for(@user) do |f| %>
-  <%= render 'shared/error_messages' %>
+  <%= render partial: 'shared/error_messages', locals: { object: @user } %>
 
   <%= f.label :name, class: 'text-left' %>
   <%= f.text_field :name %>
@@ -12,12 +12,12 @@
 
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
-  
+
   <% if current_user.admin? %>
     <fieldset class="fieldset dragons">
       <legend>Here there be dragons!</legend>
       <%= f.check_box :admin %><%= f.label :admin, 'Make this user an admin?' %>
-    </fieldset> 
+    </fieldset>
   <% end %>
 
   <%= f.submit 'Save changes', class: 'button large' %>

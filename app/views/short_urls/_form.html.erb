@@ -1,0 +1,11 @@
+<%= form_for(@short_url) do |f| %>
+  <%= render partial: 'shared/error_messages', locals: { object: @short_url } %>
+
+  <%= f.label :url_alias, 'Short URL extension' %>
+  <%= f.text_field :url_alias %>
+
+  <%= f.label :redirect, 'Redirecting to' %>
+  <%= f.url_field :redirect %>
+
+  <%= f.submit 'Save changes', class: 'button large' %>
+<% end %><!-- end `form_for(@short_url)` -->

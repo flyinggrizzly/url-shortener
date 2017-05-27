@@ -1,0 +1,5 @@
+<%= provide(:title, @short_url.url_alias) %>
+
+<ul>
+  <%= render partial: 'short_url', locals: { short_url: @short_url } %>
+</ul>
