@@ -8,7 +8,7 @@ Short URL Controller:
 ✔ update action @done(2017-05-27 18:39)
 ✔ edit action, view @done(2017-05-27 18:39)
 
-- tests for creation, editing
-- delete and destroy actions and views
+✔ tests for creation, editing @done(2017-05-27 19:45)
+✔ delete and destroy actions and views @done(2017-05-27 20:08)
 
-- model validation tests for ShortUrl after changing validator
+✔ model validation tests for ShortUrl after changing validator @done(2017-05-27 19:43)

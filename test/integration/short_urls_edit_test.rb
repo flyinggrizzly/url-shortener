@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class ShortUrlsEditTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @admin = users(:cthulhu)
+    log_in_as(@admin)
+  end
 end

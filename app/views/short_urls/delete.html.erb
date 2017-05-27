@@ -1,0 +1,8 @@
+<% provide(:title, 'Delete Short URL') %>
+
+<h1>Delete <%= @short_url.url_alias %></h1>
+
+<%= form_for @short_url, html: {method: :delete} do |f| %>
+  <h2>Are you sure you want to delete <%= @short_url.url_alias %>?</h2>
+  <p><%= f.submit "Delete", class: 'button alert' %> or <%= link_to 'Cancel', short_urls_path, class: 'button' %></p>
+<% end %>

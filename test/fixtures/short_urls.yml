@@ -31,3 +31,9 @@ google-no-sub:
 google-no-sub-no-scheme:
   url_alias: 'no-sub-no-scheme'
   redirect:  'google.com'
+
+<% 30.times do |n| %>
+short_url_<%= n %>:
+  url_alias: alias_<%= n %>
+  redirect:  'http://www.google.com'
+<% end %>
