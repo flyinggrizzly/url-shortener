@@ -11,6 +11,25 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert @short_url.valid?
   end
 
+  test 'should have http scheme prepended before save' do
+    redirect = 'www.google.com'
+    @short_url.redirect = redirect
+    @short_url.save
+    assert_equal 'http://' + redirect, @short_url.reload.redirect
+  end
+
+  test 'should not have http prepended when scheme exists' do
+    redirect = 'http://www.google.com'
+    @short_url.redirect = redirect
+    @short_url.save
+    assert_equal redirect, @short_url.reload.redirect
+
+    redirect = 'https://www.google.com'
+    @short_url.redirect = redirect
+    @short_url.save
+    assert_equal redirect, @short_url.reload.redirect
+  end
+
   test 'alias is downcased when saving' do
     mixed_case_alias = 'AdfDGG87uF'
     @short_url.url_alias = mixed_case_alias

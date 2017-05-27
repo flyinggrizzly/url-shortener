@@ -22,6 +22,7 @@ class ShortUrl < ApplicationRecord
 
   # Filters
   before_save :downcase_alias
+  before_save :prepend_http_scheme_to_redirect
 
   ###### Public methods ########################
 
@@ -35,6 +36,10 @@ class ShortUrl < ApplicationRecord
   # Downcases a url_alias before saving
   def downcase_alias
     url_alias.downcase!
+  end
+
+  def prepend_http_scheme_to_redirect
+    redirect.insert(0, 'http://') unless redirect.start_with?('http://', 'https://')
   end
 
   # Prepends the 'http://' scheme marker to redirects if they do not have it or 'https://'
