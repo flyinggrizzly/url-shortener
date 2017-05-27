@@ -1,3 +1,54 @@
 // Place all the styles related to the ShortUrls controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.short_url-form {
+  input {
+    display: block;
+  }
+  .button {
+    width: 100%;
+  }
+}
+.short_urls {
+  margin-top: 50px;
+  ul {
+    list-style: none;
+    margin-left: 0;
+    li {
+      margin-left: none;
+    }
+  }
+}
+.short_url {
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid lightgrey;
+  &:hover {
+    background: #ededed;
+  }
+  .menu li h5 a {
+    padding-left: 0;
+    margin-right: 20px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .button {
+    margin-right: 10px;
+  }
+}
+.checkbox-container {
+    .input-group-label {
+      span, .checkbox {
+        display: block;
+        float: left;
+        margin-left: 10px;
+        font-size: 1.3rem;
+      }
+    }
+  }

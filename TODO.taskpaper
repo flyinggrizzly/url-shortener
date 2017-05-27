@@ -1,0 +1,9 @@
+TODO:
+
+✔ update error messages to be model agnostic @done(2017-05-27 15:50)
+
+Short URL Controller:
+
+☐ create action
+☐ update action
+☐ edit action, view

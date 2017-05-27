@@ -2,6 +2,17 @@
 
 <h1>All Short URLs</h1>
 
-<ul class="short_urls">
-  <%= @short_urls %>
-</ul>
+<div class="callout">
+  <%= link_to 'Create a Short URL', new_short_url_path, class: 'button large expanded' %>
+</div>
+
+<section class="short_urls column">
+
+  <%= will_paginate class: 'text-center pagination' %>
+  <ul>
+    <% @short_urls.each do |short_url| %>
+      <%= render partial: short_url, short_url: short_url %>
+    <% end %>
+  </ul>
+  <%= will_paginate class: 'text-center pagination' %>
+</section>
