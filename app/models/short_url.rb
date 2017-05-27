@@ -17,9 +17,8 @@ class ShortUrl < ApplicationRecord
                         length: { maximum: 255 }
 
   validates :redirect,  presence: true,
-                        length:   { maximum: 300 }
-
-  validates :redirect, url: true
+                        length:   { maximum: 300 },
+                        url:      true
 
   # Filters
   before_save :downcase_alias

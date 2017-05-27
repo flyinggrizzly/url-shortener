@@ -4,6 +4,11 @@ TODO:
 
 Short URL Controller:
 
-☐ create action
-☐ update action
-☐ edit action, view
+✔ create action @done(2017-05-27 18:39)
+✔ update action @done(2017-05-27 18:39)
+✔ edit action, view @done(2017-05-27 18:39)
+
+- tests for creation, editing
+- delete and destroy actions and views
+
+- model validation tests for ShortUrl after changing validator

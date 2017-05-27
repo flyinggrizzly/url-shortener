@@ -26,3 +26,10 @@ User.create!(name:                  'Hastur',
                password:              password,
                password_confirmation: password)
 end
+
+50.times do |n|
+  u_alias  = "foo#{n}"
+  redirect = 'https://www.google.com'
+  ShortUrl.create!(url_alias: u_alias,
+                   redirect:  redirect)
+end

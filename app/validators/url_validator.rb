@@ -11,7 +11,6 @@ class UrlValidator < ActiveModel::EachValidator
     url = URI.parse(value)
     return true if url.scheme.nil?
     url.scheme.in?(%w[http https])
-    true
   rescue URI::InvalidURIError
     false
   end

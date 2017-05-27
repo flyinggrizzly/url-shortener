@@ -30,4 +30,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      messages:
+        url_format: "'%{value}' is not a valid URL"
+      models:
+        short_url:
+          attributes:
+            redirect:
+              url_format: "'%{value}' is not a valid URL"
