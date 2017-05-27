@@ -30,6 +30,6 @@ end
 50.times do |n|
   u_alias  = "foo#{n}"
   redirect = 'https://www.google.com'
-  ShortUrl.create!(url_alias: u_alias,
+  ShortUrl.create!(slug: u_alias,
                    redirect:  redirect)
 end

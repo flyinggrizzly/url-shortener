@@ -1,39 +1,39 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 example:
-  url_alias: 'example'
+  slug: 'example'
   redirect:  'http://www.example.com'
 
 google:
-  url_alias: 'google'
+  slug: 'google'
   redirect:  'http://www.google.com'
 
 example-secure:
-  url_alias: 'example-secure'
+  slug: 'example-secure'
   redirect:  'https://www.example.com'
 
 google-secure:
-  url_alias: 'google-secure'
+  slug: 'google-secure'
   redirect:  'https://www.google.com'
 
 example-no-scheme:
-  url_alias: 'example-no-scheme'
+  slug: 'example-no-scheme'
   redirect:  'www.example.com'
 
 google-no-scheme:
-  url_alias: 'google-no-scheme'
+  slug: 'google-no-scheme'
   redirect:  'www.google.com'
 
 google-no-sub:
-  url_alias: 'google-no-sub'
+  slug: 'google-no-sub'
   redirect:  'http://google.com'
 
 google-no-sub-no-scheme:
-  url_alias: 'no-sub-no-scheme'
+  slug: 'no-sub-no-scheme'
   redirect:  'google.com'
 
 <% 30.times do |n| %>
 short_url_<%= n %>:
-  url_alias: alias_<%= n %>
+  slug: alias_<%= n %>
   redirect:  'http://www.google.com'
 <% end %>

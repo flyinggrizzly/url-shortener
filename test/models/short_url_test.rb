@@ -3,7 +3,7 @@ require 'test_helper'
 class ShortUrlTest < ActiveSupport::TestCase
   def setup
     @user = users(:cthulhu)
-    @short_url = ShortUrl.new(url_alias: 'foobar',
+    @short_url = ShortUrl.new(slug: 'foobar',
                                          redirect:  'http://www.google.com')
   end
 
@@ -32,13 +32,13 @@ class ShortUrlTest < ActiveSupport::TestCase
 
   test 'alias is downcased when saving' do
     mixed_case_alias = 'AdfDGG87uF'
-    @short_url.url_alias = mixed_case_alias
+    @short_url.slug = mixed_case_alias
     @short_url.save
-    assert_equal mixed_case_alias.downcase, @short_url.reload.url_alias
+    assert_equal mixed_case_alias.downcase, @short_url.reload.slug
   end
 
   test 'must have alias' do
-    @short_url.url_alias = nil
+    @short_url.slug = nil
     assert_not @short_url.valid?
   end
 

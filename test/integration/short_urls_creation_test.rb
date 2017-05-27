@@ -4,9 +4,9 @@ class ShortUrlsCreationTest < ActionDispatch::IntegrationTest
   def setup
     @admin = users(:cthulhu)
     log_in_as(@admin)
-    @good_params = { url_alias: 'foobar',
+    @good_params = { slug: 'foobar',
                      redirect:  'http://whitehouse.gov' }
-    @bad_params  = { url_alias: '',
+    @bad_params  = { slug: '',
                      redirect:  'htfp://whitehouse,gov' }
   end
 

@@ -4,7 +4,7 @@ class ShortUrl < ApplicationRecord
   ### ATTRIBUTES ###############################
   # UrlAlias model has the following attributes:
   # - (id:int)
-  # - url_alias:string,   INDEXED
+  # - slug:string,   INDEXED
   # - redirect:text,      INDEXED
   # - created_at:datetime
   # - updated_at:datetime
@@ -12,7 +12,7 @@ class ShortUrl < ApplicationRecord
 
 
   # Validations
-  validates :url_alias, presence: true,
+  validates :slug, presence: true,
                         uniqueness: { case_sensitive: false },
                         length: { maximum: 255 }
 
@@ -33,9 +33,9 @@ class ShortUrl < ApplicationRecord
 
   ### Filters ###
 
-  # Downcases a url_alias before saving
+  # Downcases a slug before saving
   def downcase_alias
-    url_alias.downcase!
+    slug.downcase!
   end
 
   def prepend_http_scheme_to_redirect

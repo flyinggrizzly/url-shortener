@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UrlAliasRequestsControllerTest < ActionDispatch::IntegrationTest
+class ShortUrlRequestsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

@@ -46,7 +46,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
   test 'admins can create short urls' do
     log_in_as(@admin)
     assert_difference 'ShortUrl.count' do
-      post short_urls_path, params: { short_url: { url_alias: 'foo',
+      post short_urls_path, params: { short_url: { slug: 'foo',
                                                  redirect: 'http://www.google.com' } }
     end
   end
@@ -54,7 +54,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
   test 'normal users cannot create short urls' do
     log_in_as(@user)
     assert_no_difference 'ShortUrl.count' do
-      post short_urls_path, params: { short_url: { url_alias: 'foo',
+      post short_urls_path, params: { short_url: { slug: 'foo',
                                                    redirect:  'http://www.google.com' } }
     end
     assert_redirected_to root_url
@@ -65,17 +65,17 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
 
     # For Create
     assert_no_difference 'ShortUrl.count' do
-      post short_urls_path, params: { short_url: { url_alias: ' ',
+      post short_urls_path, params: { short_url: { slug: ' ',
                                                    redirect: 'www.google,com' } }
     end
     assert_template 'short_urls/new'
 
     # For Update
-    original_alias    = @short_url.url_alias
+    original_alias    = @short_url.slug
     original_redirect = @short_url.redirect
-    patch short_url_path(@short_url), params: { short_url: { url_alias: '',
+    patch short_url_path(@short_url), params: { short_url: { slug: '',
                                                              redirect: 'http://www.google,com' } }
-    assert @short_url.url_alias == original_alias
+    assert @short_url.slug == original_alias
     assert @short_url.redirect  == original_redirect
     assert_template 'short_urls/edit'
   end
@@ -96,9 +96,9 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@admin)
     new_alias    = 'zomg'
     new_redirect = 'http://flyinggrizzly.io'
-    patch short_url_path(@short_url), params: { short_url: { url_alias: new_alias,
+    patch short_url_path(@short_url), params: { short_url: { slug: new_alias,
                                                              redirect:  new_redirect } }
-    assert_equal new_alias,     @short_url.reload.url_alias
+    assert_equal new_alias,     @short_url.reload.slug
     assert_equal new_redirect,  @short_url.reload.redirect
   end
 
@@ -106,9 +106,9 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     new_alias    = 'zomg'
     new_redirect = 'http://flyinggrizzly.io'
-    patch short_url_path(@short_url), params: { short_url: { url_alias: new_alias,
+    patch short_url_path(@short_url), params: { short_url: { slug: new_alias,
                                                              redirect:  new_redirect } }
-    assert_not_equal new_alias,    @short_url.reload.url_alias
+    assert_not_equal new_alias,    @short_url.reload.slug
     assert_not_equal new_redirect, @short_url.reload.redirect
   end
 

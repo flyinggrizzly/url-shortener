@@ -1,6 +1,6 @@
-<%= provide(:title, @short_url.url_alias) %>
+<%= provide(:title, @short_url.slug) %>
 
-<h2><%= @short_url.url_alias %></h2>
+<h2><%= @short_url.slug %></h2>
 
 <p>Redirects to <%= link_to @short_url.redirect, @short_url.redirect %>.</p>
 <ul class="short_url--edit short_url menu">

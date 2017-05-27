@@ -1,14 +1,6 @@
 TODO:
 
-✔ update error messages to be model agnostic @done(2017-05-27 15:50)
-
-Short URL Controller:
-
-✔ create action @done(2017-05-27 18:39)
-✔ update action @done(2017-05-27 18:39)
-✔ edit action, view @done(2017-05-27 18:39)
-
-✔ tests for creation, editing @done(2017-05-27 19:45)
-✔ delete and destroy actions and views @done(2017-05-27 20:08)
-
-✔ model validation tests for ShortUrl after changing validator @done(2017-05-27 19:43)
+- reserve resources and login/out routes from slug creation
+- random slug generation
+- short url usage tracking
+  - request data
