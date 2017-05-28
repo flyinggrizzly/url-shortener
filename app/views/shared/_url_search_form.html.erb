@@ -1,23 +1,17 @@
-<fieldset class="fieldset">
+<fieldset class="fieldset short_url_search_form">
   <legend>Search existing short URLs</legend>
 
-  <%= form_tag(search_short_urls_path, method: 'get') do %>
-    <span>Find a short URL by its slug</span>
-    <%= text_field_tag :search, params[:search] %>
-    <%= hidden_field_tag :search_type, value: 'search' %>
-    <%= submit_tag 'Find short URL', class: 'button' %>
+  <%= form_tag(search_short_urls_path, method: 'get', id: 'short_url_search') do %>
+    <%= hidden_field_tag :search_type, params[:search_type], value: 'search' %>
+    <%= label_tag :search, 'Search short URLs by slug' %>
+    <%= text_field_tag :search, params[:search], placeholder: 'Search by short URL slug' %>
+    <%= submit_tag 'Search', name: nil, class: 'button' %>
   <% end %>
 
-  <%= form_tag(search_short_urls_path, method: 'get') do %>
-    <span>Find short URLs pointin to a specific address (reverse search)</span>
-    <%= text_field_tag :search, params[:search] %>
-    <%= hidden_field_tag :search_type, value: 'reverse_search' %>
-    <%= submit_tag 'Find short URLs', class: 'button' %>
-  <% end %>
-
-  <% if @short_urls.present? %>
-    <%= render @short_urls %>
-  <% else %>
-    <p>No short URLs matching your search were found.</p>
+  <%= form_tag(search_short_urls_path, method: 'get', id: 'short_url_reverse_search') do %>
+    <%= hidden_field_tag :search_type, params[:search_type], value: 'reverse_search' %>
+    <%= label_tag :reverse_search, 'Search short URLs by destination URL' %>
+    <%= text_field_tag :reverse_search, params[:search], placeholder: 'Reverse search by destination URL' %>
+    <%= submit_tag 'Search', name: nil, class: 'button' %>
   <% end %>
 </fieldset>

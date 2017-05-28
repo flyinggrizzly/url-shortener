@@ -6,6 +6,12 @@
   <%= link_to 'Create a Short URL', new_short_url_path, class: 'button large expanded' %>
 </div>
 
+
+<div>
+  <%= render partial: 'shared/url_search_form' %>
+</div>
+
+
 <section class="short_urls column">
 
   <%= will_paginate class: 'text-center pagination' %>

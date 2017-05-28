@@ -15,6 +15,8 @@
   }
 }
 .short_urls {
+  list-style: none;
+  margin-left: 0;
   margin-top: 50px;
   ul {
     list-style: none;
@@ -52,3 +54,12 @@ ul.short_url--edit.short_url.menu {
       }
     }
   }
+
+.short_url_search_form {
+  background: rgba(240,240,240,.5);
+  legend {
+    background: rgba(230,230,230,.1);
+    border: 1px solid rgba(230,230,230,.1);
+    border-radius: 3px;
+  }
+}

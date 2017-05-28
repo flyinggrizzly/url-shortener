@@ -9,7 +9,7 @@ class ShortUrlsController < ApplicationController
   def search
     if query = params[:search]
       if params[:search_type] == 'search'
-        @short_urls = ShortUrl.search(params[:search]).order('slug DESC')
+        @short_urls = ShortUrl.search(query).order('slug DESC')
       elsif params[:search_type] == 'reverse_search'
         @short_urls = ShortUrl.reverse_search(query).order('slug DESC')
       end

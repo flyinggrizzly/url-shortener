@@ -28,7 +28,7 @@ class ShortUrl < ApplicationRecord
   ###### Public methods ########################
   class << self
     def search(search)
-      where("slug ILIKE ? or slug = ?", "%#{search}%", "%#{search}%")
+      ShortUrl.where("slug ILIKE ?", "%#{search}%")
     end
 
     def reverse_search(search)
