@@ -14,6 +14,8 @@
 6. Create the dev and test databases: `bundle exec rails db:create`.
 7. Run it up: `bundle exec rails s -p 3001`; also you can use `./serve.sh`
 
+If you want to reserve any URL slugs from use, do so in `config/initializers/reserved_slugs.rb`. It is currently just the slugs that would break the application: `/admin`. `/login/`, and `/logout`.
+
 ### Troubleshooting
 
 If you run into an issue where PostgreSQL shouts at you about some ForeignKeyViolation or something, it seems it's because ActiveRecord disables foreign key insertion before running tests. Easiest solution is to run:
@@ -50,6 +52,7 @@ To change this, first, mess around with the `before_action` filters in `users_co
   - [ ] most popular short URLs
   - [ ] source of traffic
 - [ ] clean up layouts so they're more consistent with columns
+- [ ] discvovery and implementation of a more programmatic way of excluding anything in the application's routes from being set as a short URL slug
 
 ## License
 

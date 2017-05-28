@@ -2,38 +2,38 @@
 
 example:
   slug: 'example'
-  redirect:  'http://www.example.com'
+  redirect:  'http://www.example.com/'
 
 google:
   slug: 'google'
-  redirect:  'http://www.google.com'
+  redirect:  'http://www.google.com/'
 
 example-secure:
   slug: 'example-secure'
-  redirect:  'https://www.example.com'
+  redirect:  'https://www.example.com/'
 
 google-secure:
   slug: 'google-secure'
-  redirect:  'https://www.google.com'
+  redirect:  'https://www.google.com/'
 
 example-no-scheme:
   slug: 'example-no-scheme'
-  redirect:  'www.example.com'
+  redirect:  'www.example.com/'
 
 google-no-scheme:
   slug: 'google-no-scheme'
-  redirect:  'www.google.com'
+  redirect:  'www.google.com/'
 
 google-no-sub:
   slug: 'google-no-sub'
-  redirect:  'http://google.com'
+  redirect:  'http://google.com/'
 
 google-no-sub-no-scheme:
   slug: 'no-sub-no-scheme'
-  redirect:  'google.com'
+  redirect:  'google.com/'
 
 <% 30.times do |n| %>
 short_url_<%= n %>:
   slug: alias_<%= n %>
-  redirect:  'http://www.google.com'
+  redirect:  'http://www.google.com/'
 <% end %>

@@ -101,4 +101,12 @@ class ShortUrlTest < ActiveSupport::TestCase
     @short_url.slug = 'admin'
     assert_not @short_url.valid?
   end
+
+  test 'slugs cannot equal login or logout' do
+    @short_url.slug = 'login'
+    assert_not @short_url.valid?
+
+    @short_url.slug = 'logout'
+    assert_not @short_url.valid?
+  end
 end
