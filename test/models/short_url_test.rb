@@ -109,4 +109,40 @@ class ShortUrlTest < ActiveSupport::TestCase
     @short_url.slug = 'logout'
     assert_not @short_url.valid?
   end
+
+  test 'search works' do
+    @short_url.save
+    assert_includes ShortUrl.search(@short_url.slug), @short_url
+  end
+
+  test 'search works for values with multiple hits' do
+    20.times do |n|
+      slug = "slug_#{n}"
+      redirect = 'http://www.google.com'
+      ShortUrl.create!(slug: slug, redirect: redirect)
+    end
+    short_url = ShortUrl.new(slug: 'slug_20', redirect: 'http://www.google.com')
+    short_url.save
+
+    assert_includes ShortUrl.search('slug_'), short_url
+    assert_equal 21, ShortUrl.search('slug_').size
+  end
+
+  test 'reverse search works' do
+    @short_url.save
+    assert_includes ShortUrl.reverse_search(@short_url.redirect), @short_url
+  end
+
+  test 'reverse search works for values with multiple hits' do
+    20.times do |n|
+      slug = "slug_#{n}"
+      redirect = "http://www.numbered-domain-#{n}.com"
+      ShortUrl.create!(slug: slug, redirect: redirect)
+    end
+    short_url = ShortUrl.new(slug: 'slug_20', redirect: 'http://www.numbered-domain-20.com')
+    short_url.save
+
+    assert_includes ShortUrl.reverse_search('www.numbered-domain-'), short_url
+    assert_equal 21, ShortUrl.reverse_search('www.numbered-domain-').size
+  end
 end

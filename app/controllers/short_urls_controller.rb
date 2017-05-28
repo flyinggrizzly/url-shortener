@@ -7,13 +7,7 @@ class ShortUrlsController < ApplicationController
   end
 
   def search
-    if query = params[:search]
-      if params[:search_type] == 'search'
-        @short_urls = ShortUrl.search(query).order('slug DESC')
-      elsif params[:search_type] == 'reverse_search'
-        @short_urls = ShortUrl.reverse_search(query).order('slug DESC')
-      end
-    end
+    search_by_type(params)
   end
 
   def show
@@ -61,8 +55,18 @@ class ShortUrlsController < ApplicationController
 
   private
 
+  # Strengthens parameters
   def short_url_params
     params.require(:short_url).permit(:slug, :redirect)
+  end
+
+  # Performs search or reverse search based on request
+  def search_by_type(params)
+    if params[:search]
+      @short_urls = ShortUrl.search(params[:search]).order('slug DESC')
+    elsif params[:reverse_search]
+      @short_urls = ShortUrl.reverse_search(params[:reverse_search]).order('slug DESC')
+    end
   end
 
   ###### Filters ############################
