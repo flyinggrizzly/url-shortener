@@ -1,6 +1,6 @@
 module ApplicationHelper
   def full_title(page_title = '')
-    base_title = 'URL Shortener'
+    base_title = 'URL Grey'
     if page_title.empty?
       base_title
     else

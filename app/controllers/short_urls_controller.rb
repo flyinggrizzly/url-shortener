@@ -63,9 +63,9 @@ class ShortUrlsController < ApplicationController
   # Performs search or reverse search based on request
   def search_by_type(params)
     if params[:search]
-      @short_urls = ShortUrl.search(params[:search]).order('slug DESC')
+      @short_urls = ShortUrl.search(params[:search]).order('slug ASC')
     elsif params[:reverse_search]
-      @short_urls = ShortUrl.reverse_search(params[:reverse_search]).order('slug DESC')
+      @short_urls = ShortUrl.reverse_search(params[:reverse_search]).order('slug ASC')
     end
   end
 
