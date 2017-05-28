@@ -1,4 +1,6 @@
-# README
+# UrlGrey, Picard's favorite URL shortener
+
+![tea, earl grey, hot!](picard-tea.gif)
 
 ## Setup
 
