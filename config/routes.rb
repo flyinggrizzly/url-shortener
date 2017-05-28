@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   scope '/admin' do
     resources :users
-    resources :short_urls
+    resources :short_urls do
+      get 'search', on: :collection
+    end
   end
 
   get     '/login',  to: 'sessions#new'

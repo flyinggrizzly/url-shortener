@@ -6,6 +6,16 @@ class ShortUrlsController < ApplicationController
     @short_urls = ShortUrl.paginate(page: params[:page])
   end
 
+  def search
+    if query = params[:search]
+      if params[:search_type] == 'search'
+        @short_urls = ShortUrl.search(params[:search]).order('slug DESC')
+      elsif params[:search_type] == 'reverse_search'
+        @short_urls = ShortUrl.reverse_search(query).order('slug DESC')
+      end
+    end
+  end
+
   def show
     @short_url = ShortUrl.find(params[:id])
   end

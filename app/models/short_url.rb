@@ -23,10 +23,18 @@ class ShortUrl < ApplicationRecord
 
   # Filters
   before_save :downcase_alias
-  before_save :prepend_http_scheme_to_redirect
+  before_save :strip_scheme
 
   ###### Public methods ########################
+  class << self
+    def search(search)
+      where("slug ILIKE ? or slug = ?", "%#{search}%", "%#{search}%")
+    end
 
+    def reverse_search(search)
+      where("redirect ILIKE ?", "%#{search}%")
+    end
+  end
 
   ###### Private methods #######################
 
@@ -40,7 +48,11 @@ class ShortUrl < ApplicationRecord
   end
 
   # Prepends the 'http://' scheme marker to redirects if they do not have it or 'https://'
-  def prepend_http_scheme_to_redirect
-    redirect.insert(0, 'http://') unless redirect.start_with?('http://', 'https://')
+  def strip_scheme
+    if URI.parse(self.redirect).scheme
+      redirect = self.redirect
+      host = URI.parse(redirect).host
+      self.redirect = redirect[redirect.index(host), redirect.size - 1]
+    end
   end
 end
