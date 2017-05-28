@@ -138,4 +138,21 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to root_url
   end
+
+  test 'admins can search' do
+    log_in_as(@admin)
+    get search_short_urls_path
+    assert_response :success
+  end
+
+  test 'normal users can search' do
+    log_in_as(@user)
+    get search_short_urls_path
+    assert_response :success
+  end
+
+  test 'unauthenticated users can search' do
+    get search_short_urls_path
+    assert_response :success
+  end
 end
