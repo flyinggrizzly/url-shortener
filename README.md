@@ -2,6 +2,7 @@
 
 ![tea, earl grey, hot!](picard-tea.gif)
 
+
 ## Setup
 
 1. Get a vagrant box (recommend Ubuntu, specifically [mine](https://github.com/flyinggrizzly/vagrant) because it comes with RBENV and the right Ruby versions out of the box.
@@ -44,8 +45,12 @@ To change this, first, mess around with the `before_action` filters in `users_co
 - [ ] password resets for existing users (currently would have to be done by an admin)
 - [ ] emailing users once created and prompting them to set passwords (currently set by admin)
 - [ ] implement shortening and redirection
-  - [ ] random short URLs
-  - [ ] vanity/custom short URLs
+  - [ ] random short URL generation
+  - [x] vanity/custom short URLs
+  - [x] reserving application routes as slugs (though this could get better)
+  - [x] redirection
+- [x] URL search and reverse search for checking if a short URL destination already exists, or if a slug is taken
+- [ ] move search into its own controller so results don't appear behind the `/admin` path (because they're visible to anonymous users)
 - [ ] displaying short URL stats
   - [ ] number of hits
     - [ ] overall
