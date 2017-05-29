@@ -95,7 +95,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
   test 'admins can patch update' do
     log_in_as(@admin)
     new_alias    = 'zomg'
-    new_redirect = 'flyinggrizzly.io'
+    new_redirect = 'http://flyinggrizzly.io'
     patch short_url_path(@short_url), params: { short_url: { slug: new_alias,
                                                              redirect:  new_redirect } }
     assert_equal new_alias,     @short_url.reload.slug

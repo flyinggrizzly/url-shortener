@@ -11,16 +11,21 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert @short_url.valid?
   end
 
-  test 'should not have http scheme prepended before save' do
+  test 'should have http scheme prepended before save if no scheme' do
     redirect = 'www.google.com'
-    @short_url.redirect = 'http://' + redirect
+    @short_url.redirect = redirect
     @short_url.save
-    assert_equal redirect, @short_url.reload.redirect
+    assert_equal 'http://' + redirect, @short_url.reload.redirect
   end
 
-  test 'should have scheme stripped when scheme exists' do
-    redirect = 'www.google.com'
-    @short_url.redirect = 'http://' + redirect
+  test 'scheme should not be changed when scheme exists' do
+    redirect = 'http://www.google.com'
+    @short_url.redirect = redirect
+    @short_url.save
+    assert_equal redirect, @short_url.reload.redirect
+
+    redirect = 'https://www.google.com'
+    @short_url.redirect = redirect
     @short_url.save
     assert_equal redirect, @short_url.reload.redirect
   end
