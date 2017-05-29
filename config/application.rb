@@ -11,6 +11,13 @@ module UrlGrey
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
+    # Customize your application's name
+    config.application_name = 'URL Grey'
+
+    # Optionally set '/' as a short URL
+    config.root_redirect_enabled  = true
+    config.root_redirect_url      = 'http://flyinggrizzly.io'
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

@@ -1,6 +1,6 @@
 module ApplicationHelper
   def full_title(page_title = '')
-    base_title = 'URL Grey'
+    base_title = UrlGrey::Application.config.application_name
     if page_title.empty?
       base_title
     else
