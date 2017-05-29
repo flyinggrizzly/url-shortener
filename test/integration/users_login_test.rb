@@ -11,7 +11,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     post login_path, params: { session: { email: '', password: '' } }
     assert_template 'sessions/new'
     assert_not flash.empty?
-    get root_path
+    get root_or_admin_path
     assert flash.empty?
 
     # Check nav has right elements
@@ -22,7 +22,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     get  login_path
     post login_path, params: { session: { email:    @user.email,
                                           password: 'goofballgoofball' } }
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
     follow_redirect!
 
     assert_template 'static_pages/home'
@@ -41,7 +41,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
     delete logout_path
     assert_not is_logged_in?
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
     follow_redirect!
     assert_select 'a[href=?]', login_path
     assert_select 'a[href=?]', logout_path,     count: 0

@@ -18,6 +18,6 @@ class UserDeleteTest < ActionDispatch::IntegrationTest
   test 'delete page should only be available to admins' do
     log_in_as(@user)
     get delete_user_path(@admin)
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
   end
 end

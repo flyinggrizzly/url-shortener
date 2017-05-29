@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = 'User updated'
-      redirect_to root_url
+      redirect_to root_or_admin_url
     else
       render 'edit'
     end
@@ -81,11 +81,11 @@ class UsersController < ApplicationController
   end
 
   def admin_user
-    redirect_to(root_url) unless current_user.admin?
+    redirect_to(root_or_admin_url) unless current_user.admin?
   end
 
   def correct_or_admin_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user) || current_user.admin?
+    redirect_to(root_or_admin_url) unless current_user?(@user) || current_user.admin?
   end
 end

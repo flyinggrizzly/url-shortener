@@ -4,7 +4,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @admin = users(:cthulhu)
     @user  = users(:yig)
-    @short_url = short_urls(:example)
+    @short_url = short_urls(:google)
   end
 
   test 'admins can get index' do
@@ -16,7 +16,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
   test 'normal users cannot get index' do
     log_in_as(@user)
     get short_urls_path
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
   end
 
   test 'admins can get show' do
@@ -28,7 +28,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
   test 'normal users cannot get show' do
     log_in_as(@user)
     get short_url_path(@short_url)
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
   end
 
   test 'admins can get new' do
@@ -40,7 +40,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
   test 'normal users cannot get new' do
     log_in_as(@user)
     get new_short_url_path
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
   end
 
   test 'admins can create short urls' do
@@ -57,7 +57,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
       post short_urls_path, params: { short_url: { slug: 'foo',
                                                    redirect:  'http://www.google.com' } }
     end
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
   end
 
   test 'bad short url params are not saved and rerender form' do
@@ -89,7 +89,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
   test 'normal users cannot get edit' do
     log_in_as(@user)
     get edit_short_url_path(@short_url)
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
   end
 
   test 'admins can patch update' do
@@ -121,7 +121,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
   test 'normal users cannot get delete' do
     log_in_as(@user)
     get delete_short_url_path(@short_url)
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
   end
 
   test 'admins can destroy' do
@@ -136,7 +136,7 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference 'ShortUrl.count' do
       delete short_url_path(@short_url)
     end
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
   end
 
   test 'admins can search' do

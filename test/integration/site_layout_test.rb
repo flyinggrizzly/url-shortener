@@ -2,11 +2,11 @@
 
 class SiteLayoutTest < ActionDispatch::IntegrationTest
   test 'should have nav and links' do 
-    get root_url
+    get root_or_admin_url
     assert_response :success
     assert_select 'title', full_title
     assert_select 'nav'
-    assert_select 'a#logo[href=?]', root_url
+    assert_select 'a#logo[href=?]', root_or_admin_url
     # other nav elements appear based on log in status, and are tested in users_login_test.rb
   end
 

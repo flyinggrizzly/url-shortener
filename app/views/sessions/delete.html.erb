@@ -4,5 +4,5 @@
 
 <%= form_tag(logout_path, method: 'delete') do %>
   <h2>Are you sure you want to log out?</h2>
-  <p><%= submit_tag "Log out", class: 'button alert' %> or <%= link_to "Cancel", root_url, class: 'button' %></p>
+  <p><%= submit_tag "Log out", class: 'button alert' %> or <%= link_to "Cancel", root_or_admin_url, class: 'button' %></p>
 <% end %>

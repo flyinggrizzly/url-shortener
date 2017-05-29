@@ -20,6 +20,6 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
   test 'index only available to admins' do
     log_in_as(@user)
     get users_path
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
   end
 end

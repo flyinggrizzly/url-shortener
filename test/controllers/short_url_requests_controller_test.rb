@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ShortUrlRequestsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @real_short_url = short_urls(:example)
+    @real_short_url = short_urls(:google)
     @fake_short_url = ShortUrl.new(slug: 'nonono', redirect: 'http://rubyonrails.org/') # Don't save
   end
 
@@ -13,7 +13,7 @@ class ShortUrlRequestsControllerTest < ActionDispatch::IntegrationTest
 
   test 'requesting a bad short url redirects home' do
     get "/#{@fake_short_url.slug}"
-    assert_redirected_to root_url
+    assert_redirected_to root_or_admin_url
     assert_not flash.empty?
   end
 

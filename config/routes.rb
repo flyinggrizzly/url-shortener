@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
   # Route '/' to a custom location in production
-  # Route '/' to a custom location in production
-  if UrlGrey::Application.config.root_redirect_enabled && Rails.env.production?
-    get '/', to: redirect(UrlGrey::Application.config.root_redirect)
+  if UrlGrey::Application.config.root_redirect_enabled
+    get '/', to: redirect(UrlGrey::Application.config.root_redirect_url)
   else
     root 'static_pages#home'
   end
 
+  get '/admin', to: 'static_pages#home'
   scope '/admin' do
     resources :users
     resources :short_urls do
