@@ -2,7 +2,7 @@
 
 ![tea, earl grey, hot!](picard-tea.gif)
 
-[![Code Climate](https://codeclimate.com/github/flyinggrizzly/url-grey/badges/gpa.svg)](https://codeclimate.com/github/flyinggrizzly/url-grey) [![Coverage Status]
+[![Code Climate](https://codeclimate.com/github/flyinggrizzly/url-grey/badges/gpa.svg)](https://codeclimate.com/github/flyinggrizzly/url-grey)
 
 ## About
 
