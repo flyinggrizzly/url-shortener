@@ -1,7 +1,0 @@
-TODO:
-
-✔ reserve resources and login/out routes from slug creation @done(2017-05-28 09:55)
-- url search and reverse search
-- random slug generation
-- short url usage tracking
-  - request data

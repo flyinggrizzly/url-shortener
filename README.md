@@ -45,6 +45,8 @@ Credits to [this post](http://www.42.mach7x.com/2016/05/19/activerecordinvalidfo
 - Using Heroku, and [the CLI](https://devcenter.heroku.com/articles/heroku-cli).
 - [Dokku](http://dokku.viewdocs.io/dokku/)
 
+Be sure to set the following environment variables: `ADMIN_NAME`, `ADMIN_EMAIL`, `ADMIN_PASSWD`, and `ROOT_REDIRECT_URL` before deploying to live (latter only if you want to use the root URL as a redirect as well).
+
 ## Notes
 
 This is currently being built so that only registered users can see other users... and the only way to create users is to have an admin do so.
@@ -64,6 +66,7 @@ To change this, first, mess around with the `before_action` filters in `users_co
   - [x] redirection
 - [x] URL search and reverse search for checking if a short URL destination already exists, or if a slug is taken
 - [ ] move search into its own controller so results don't appear behind the `/admin` path (because they're visible to anonymous users)
+- [ ] disallow the applications own domain as a redirection destination (hello infinite loop!)
 - [ ] displaying short URL stats
   - [ ] number of hits
     - [ ] overall
