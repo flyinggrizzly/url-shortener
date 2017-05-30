@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
   end
 
   def root
-    if UrlGrey::Application.config.root_redirect_enabled && @root_url = ShortUrl.find_by(slug: 'root')
-      redirect_to @root_url.redirect
+    if root_redirect_enabled? && root_redirect_url
+      redirect_to root_redirect_url
     else
       render 'static_pages/home'
     end
