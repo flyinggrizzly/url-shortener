@@ -31,6 +31,10 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', logout_path
     assert_select 'a[href=?]', short_urls_path
     assert_select 'a[href=?]', user_path(@user)
+
+    # Check we're seeing search and new short url button
+    assert_select 'a[href=?]', new_short_url_path, class: 'button create_url', text: 'Create a Short URL'
+    assert_select 'fieldset.short_url_search_form' 
   end
 
   test 'logout should work' do
