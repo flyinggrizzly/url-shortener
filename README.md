@@ -2,6 +2,9 @@
 
 ![tea, earl grey, hot!](picard-tea.gif)
 
+## About
+
+UrlGrey is a URL shortener written in Rails 5, backed by PostGres (or whatever you want, just change `database.yml`). The best part is its ability to redirect the root URL to allow for a bare domain vanity URL (try hitting https://grz.li and see where it takes you!).
 
 ## Setup
 
@@ -19,19 +22,28 @@
 
 If you want to reserve any URL slugs from use, do so in `config/initializers/reserved_slugs.rb`. It is currently just the slugs that would break the application: `/admin`. `/login/`, and `/logout`.
 
+### Configuration
+
+The app has some basic configurations that can/should be set in `config/application.rb` before deploying it for yourself. Currently, this is just to enable the special root url redirect, and to rename the application to suit your own tastes. Maybe you prefer coffee, and have some awesome coffee/URL pun instead of 'Url Grey'?
+
+- To rename the application, change: `config.application_name = 'URL Grey'`
+- To configure the root redirect, before deploying the app, change the first `ShortUrl` seed's redirect value
+  - This can also be changed like any other redirect once the app is running. Just find the 'root' redirect
+- To disable the root redirect, set `config.root_redirect_enabled  = true` to `false`
+
 ### Troubleshooting
 
 If you run into an issue where PostgreSQL shouts at you about some ForeignKeyViolation or something, it seems it's because ActiveRecord disables foreign key insertion before running tests. Easiest solution is to run:
 
 1. `sudo -u postgres psql`
-2. `psql$ alter role url_shortener_user superuser;`
+2. `psql$ alter role url_shortener_user superuser; # ONLY DO THIS IN DEV AND TEST ENVIRONMENTS!!!`
 
 Credits to [this post](http://www.42.mach7x.com/2016/05/19/activerecordinvalidforeignkey-pgforeignkeyviolation-error/)
 
 ## Deployment
 
 - Using Heroku, and [the CLI](https://devcenter.heroku.com/articles/heroku-cli).
-- (Google App Engine? Still gotta figure out how to use it...)
+- [Dokku](http://dokku.viewdocs.io/dokku/)
 
 ## Notes
 
@@ -46,6 +58,7 @@ To change this, first, mess around with the `before_action` filters in `users_co
 - [ ] emailing users once created and prompting them to set passwords (currently set by admin)
 - [ ] implement shortening and redirection
   - [ ] random short URL generation
+  - [X] special root url redirect for super amazeballs vanity urls
   - [x] vanity/custom short URLs
   - [x] reserving application routes as slugs (though this could get better)
   - [x] redirection
@@ -64,3 +77,7 @@ To change this, first, mess around with the `before_action` filters in `users_co
 ## License
 
 (C) 2017 Sean Moran-Richards/Flying Grizzly. Licensed under the [MIT License](https://mit-license.org/).
+
+## Contributing
+
+Check out [the todo list above](#todo), fork the app, make a change in a sensibly-named feature branch, and create a PR!
