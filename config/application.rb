@@ -14,9 +14,9 @@ module UrlGrey
     # Customize your application's name
     config.application_name = 'URL Grey'
 
-    # Optionally set '/' as a short URL
+    # Optionally set '/' as a short URL. This will only have effect
+    ## if the app can find a ShortUrl with slug 'root' to redirect to
     config.root_redirect_enabled  = true
-    config.root_redirect_url      = 'http://flyinggrizzly.io'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

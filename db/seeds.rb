@@ -4,6 +4,8 @@ User.create!(name:                  ENV['ADMIN_NAME'],
              password:              ENV['ADMIN_PASSWD'],
              password_confirmation: ENV['ADMIN_PASSWRD'])
 
+ShortUrl.create!(slug: 'root', redirect: 'http://flyinggrizzly.io')
+
 ShortUrl.create!(slug: '2osPc0Y', redirect: 'http://flyinggrizzly.io/2017/04/11/test-should-bring-joy-do/')
 
 ShortUrl.create!(slug: '2nuwLJN', redirect: 'http://flyinggrizzly.io/2017/03/17/ruby-noob-bundler-rake-guard/')
