@@ -4,6 +4,7 @@
 
 [![Code Climate](https://codeclimate.com/github/flyinggrizzly/url-grey/badges/gpa.svg)](https://codeclimate.com/github/flyinggrizzly/url-grey)
 [![security - Hakiri](https://hakiri.io/github/flyinggrizzly/url-grey/staging.svg)](https://hakiri.io/github/flyinggrizzly/url-grey/staging)
+[![Test coverage](https://codeclimate.com/github/flyinggrizzly/url-grey/badges/coverage.svg)](https://codeclimate.com/github/flyinggrizzly/url-grey/coverage)
 
 ## About
 
