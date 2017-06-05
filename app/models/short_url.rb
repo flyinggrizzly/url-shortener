@@ -26,11 +26,19 @@ class ShortUrl < ApplicationRecord
   before_save :ensure_scheme
 
   ###### Public methods ########################
+
+  # Sets up short URL slugs to be used as params in routing
+  def to_param
+    slug
+  end
+  
   class << self
+    # Searches for short URL by slug
     def search(search)
       ShortUrl.where("slug ILIKE ?", "%#{search}%")
     end
 
+    # Searches for short URLs by redirect
     def reverse_search(search)
       where("redirect ILIKE ?", "%#{search}%")
     end

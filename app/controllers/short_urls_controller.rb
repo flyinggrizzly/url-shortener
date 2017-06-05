@@ -11,7 +11,7 @@ class ShortUrlsController < ApplicationController
   end
 
   def show
-    @short_url = ShortUrl.find(params[:id])
+    @short_url = ShortUrl.find_by(slug: params[:slug])
   end
 
   def new
@@ -29,11 +29,11 @@ class ShortUrlsController < ApplicationController
   end
 
   def edit
-    @short_url = ShortUrl.find(params[:id])
+    @short_url = ShortUrl.find_by(slug: params[:slug])
   end
 
   def update
-    @short_url = ShortUrl.find(params[:id])
+    @short_url = ShortUrl.find_by(slug: params[:slug])
     if @short_url.update_attributes(short_url_params)
       flash[:success] = "#{@short_url.slug} updated successfully."
       redirect_to short_urls_path
@@ -43,11 +43,11 @@ class ShortUrlsController < ApplicationController
   end
 
   def delete
-    @short_url = ShortUrl.find(params[:id])
+    @short_url = ShortUrl.find_by(slug: params[:slug])
   end
 
   def destroy
-    @short_url = ShortUrl.find(params[:id])
+    @short_url = ShortUrl.find_by(slug: params[:slug])
     @short_url.destroy
     flash[:success] = "Short URL '#{@short_url.slug} has been deleted."
     redirect_to short_urls_path
@@ -57,7 +57,11 @@ class ShortUrlsController < ApplicationController
 
   # Strengthens parameters
   def short_url_params
-    params.require(:short_url).permit(:slug, :redirect)
+    if ShortUrl.find_by(slug: params[:slug]) # Only permit redirect editing if the short URL exists
+      params.require(:short_url).permit(:redirect)
+    else
+      params.require(:short_url).permit(:slug, :redirect)
+    end
   end
 
   # Performs search or reverse search based on request
