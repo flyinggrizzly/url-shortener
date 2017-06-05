@@ -71,11 +71,8 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     assert_template 'short_urls/new'
 
     # For Update
-    original_alias    = @short_url.slug
     original_redirect = @short_url.redirect
-    patch short_url_path(@short_url), params: { short_url: { slug: '',
-                                                             redirect: 'http://www.google,com' } }
-    assert @short_url.slug == original_alias
+    patch short_url_path(@short_url), params: { short_url: { redirect: '  ' } }
     assert @short_url.redirect  == original_redirect
     assert_template 'short_urls/edit'
   end
@@ -94,12 +91,17 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
 
   test 'admins can patch update' do
     log_in_as(@admin)
-    new_alias    = 'zomg'
     new_redirect = 'http://flyinggrizzly.io'
-    patch short_url_path(@short_url), params: { short_url: { slug: new_alias,
-                                                             redirect:  new_redirect } }
-    assert_equal new_alias,     @short_url.reload.slug
+    patch short_url_path(@short_url), params: { short_url: { redirect: new_redirect } }
     assert_equal new_redirect,  @short_url.reload.redirect
+  end
+
+  test 'cannot change slug when editing' do
+    log_in_as(@admin)
+    old_slug = @short_url.slug
+    new_slug = 'zomg'
+    patch short_url_path(@short_url), params: { short_url: { slug: new_slug } }
+    assert_equal old_slug, @short_url.reload.slug
   end
 
   test 'normal users cannot patch update' do
@@ -154,5 +156,41 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
   test 'unauthenticated users can search' do
     get search_short_urls_path
     assert_response :success
+  end
+
+  test 'short url resource paths displays as short-url' do
+    log_in_as(@admin)
+
+    # Index
+    assert_includes     short_urls_path, 'short-url'
+    assert_not_includes short_urls_path, 'short_url'
+
+    # Show
+    assert_includes     short_url_path(@short_url), 'short-url'
+    assert_not_includes short_url_path(@short_url), 'short_url'
+
+    # Edit
+    assert_includes     edit_short_url_path(@short_url), 'short-url'
+    assert_not_includes edit_short_url_path(@short_url), 'short_url'
+
+    # Delete
+    assert_includes     delete_short_url_path(@short_url), 'short-url'
+    assert_not_includes delete_short_url_path(@short_url), 'short_url'
+  end
+
+  test 'short URL slugs not IDs appear in path' do
+    log_in_as(@admin)
+
+    # Show
+    assert_includes     short_url_path(@short_url), @short_url.slug
+    assert_not_includes short_url_path(@short_url), @short_url.id.to_s
+
+    # Edit
+    assert_includes     edit_short_url_path(@short_url), @short_url.slug
+    assert_not_includes edit_short_url_path(@short_url), @short_url.id.to_s
+
+    # Delete
+    assert_includes     delete_short_url_path(@short_url), @short_url.slug
+    assert_not_includes delete_short_url_path(@short_url), @short_url.id.to_s
   end
 end

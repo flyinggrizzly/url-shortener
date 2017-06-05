@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   scope '/admin' do
     resources :users
-    resources :short_urls do
+    resources :short_urls, param: :slug, path: 'short-urls' do
       get 'search', on: :collection
     end
   end
