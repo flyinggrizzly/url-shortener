@@ -11,7 +11,7 @@
 
 UrlGrey is a URL shortener written in Rails 5, backed by PostGres (or whatever you want, just change `database.yml`). The best part is its ability to redirect the root URL to allow for a bare domain vanity URL (try hitting https://grz.li and see where it takes you!).
 
-[Changelog](changelog).
+[Changelog](changelog.md).
 
 ## Setup
 
