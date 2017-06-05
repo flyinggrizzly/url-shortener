@@ -1,13 +1,17 @@
 # UrlGrey, Picard's favorite URL shortener
+### v 0.1.1
 
 ![tea, earl grey, hot!](picard-tea.gif)
 
 [![Code Climate](https://codeclimate.com/github/flyinggrizzly/url-grey/badges/gpa.svg)](https://codeclimate.com/github/flyinggrizzly/url-grey)
 [![security - Hakiri](https://hakiri.io/github/flyinggrizzly/url-grey/staging.svg)](https://hakiri.io/github/flyinggrizzly/url-grey/staging)
+[![Test coverage](https://codeclimate.com/github/flyinggrizzly/url-grey/badges/coverage.svg)](https://codeclimate.com/github/flyinggrizzly/url-grey/coverage)
 
 ## About
 
 UrlGrey is a URL shortener written in Rails 5, backed by PostGres (or whatever you want, just change `database.yml`). The best part is its ability to redirect the root URL to allow for a bare domain vanity URL (try hitting https://grz.li and see where it takes you!).
+
+[Changelog](changelog.md).
 
 ## Setup
 

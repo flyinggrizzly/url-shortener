@@ -1,3 +1,13 @@
 <%= provide(:title, "Edit #{@short_url.slug}") %>
 
-<%= render 'form' %>
+<%= form_for(@short_url) do |f| %>
+  <%= render partial: 'shared/error_messages', locals: { object: @short_url } %>
+
+  <h3>Change the redirect for <%= @short_url.slug %></h3>
+
+  <%= f.label :redirect, 'Redirecting to' %>
+  <%= f.url_field :redirect %>
+
+  <%= f.submit 'Save changes', class: 'button large' %>
+<% end %><!-- end `form_for(@short_url)` -->
+

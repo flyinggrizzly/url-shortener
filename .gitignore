@@ -21,6 +21,9 @@
 # Ignore Spring files
 /spring/*.pid
 
+# Ignore test coverage checks
+coverage/*
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
