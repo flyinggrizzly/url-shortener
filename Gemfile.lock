@@ -139,6 +139,7 @@ GEM
     rack (2.0.3)
     rack-test (0.6.3)
       rack (>= 1.0)
+    radix (2.2.1)
     rails (5.1.1)
       actioncable (= 5.1.1)
       actionmailer (= 5.1.1)
@@ -251,6 +252,7 @@ DEPENDENCIES
   minitest-reporters (~> 1.1.9)
   pg (~> 0.18)
   puma (~> 3.7)
+  radix
   rails (~> 5.1.1)
   rails-controller-testing (~> 0.1.1)
   sass-rails (~> 5.0)
