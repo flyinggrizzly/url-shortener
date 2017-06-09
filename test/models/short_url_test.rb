@@ -152,6 +152,9 @@ class ShortUrlTest < ActiveSupport::TestCase
   end
 
   test 'random slugs are unique' do
+    # Make sure the test database starts iterating over random slugs from the beginning
+    AppConfig.current_random_slug = 0
+
     # Create 1 char short URLs for all options except 'z'
     ('a'..'y').each do |c|
       ShortUrl.create!(slug: c, redirect: 'https://www.google.com')
@@ -160,6 +163,7 @@ class ShortUrlTest < ActiveSupport::TestCase
       ShortUrl.create!(slug: c, redirect: 'https://www.google.com')
     end
 
+    # 'z' is the only possible unique slug of length 1
     assert_equal 'z', ShortUrl.random_slug(1)
   end
 
@@ -169,6 +173,9 @@ class ShortUrlTest < ActiveSupport::TestCase
   end
 
   test 'custom random-slug length is increased if no more options at custom length' do
+    # Make sure we start random slug count from 0
+    AppConfig.current_random_slug = 0
+
     # Park all single char slugs
     ('a'..'z').each do |c|
       ShortUrl.create!(slug: c, redirect: 'https://www.google.com')
@@ -178,5 +185,14 @@ class ShortUrlTest < ActiveSupport::TestCase
     end
 
     assert_equal 2, ShortUrl.random_slug(1).length
+  end
+
+  test 'random slugs do not contain hyphens' do
+    # Make sure we start slugs from 0
+    AppConfig.current_random_slug = 0
+    # For every possible configuration of a random slug with length 2 chars
+    (37**2).times do |n|
+      assert_not ShortUrl.random_slug(2).include?('-')
+    end
   end
 end
