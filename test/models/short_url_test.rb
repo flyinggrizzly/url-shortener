@@ -150,4 +150,33 @@ class ShortUrlTest < ActiveSupport::TestCase
     assert_includes ShortUrl.reverse_search('www.numbered-domain-'), short_url
     assert_equal 21, ShortUrl.reverse_search('www.numbered-domain-').size
   end
+
+  test 'random slugs are unique' do
+    # Create 1 char short URLs for all options except 'z'
+    ('a'..'y').each do |c|
+      ShortUrl.create!(slug: c, redirect: 'https://www.google.com')
+    end
+    ('0'..'9').each do |c|
+      ShortUrl.create!(slug: c, redirect: 'https://www.google.com')
+    end
+
+    assert_equal 'z', ShortUrl.random_slug(1)
+  end
+
+  test 'random slugs are the right length' do
+    assert_equal UrlGrey::Application.config.random_slug_length, ShortUrl.random_slug.length
+    assert_equal 2, ShortUrl.random_slug(2).length
+  end
+
+  test 'custom random-slug length is increased if no more options at custom length' do
+    # Park all single char slugs
+    ('a'..'z').each do |c|
+      ShortUrl.create!(slug: c, redirect: 'https://www.google.com')
+    end
+    ('0'..'9').each do |c|
+      ShortUrl.create!(slug: c, redirect: 'https://www.google.com')
+    end
+
+    assert_equal 2, ShortUrl.random_slug(1).length
+  end
 end

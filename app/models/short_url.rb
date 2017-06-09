@@ -1,5 +1,6 @@
 class ShortUrl < ApplicationRecord
   require 'uri'
+  include ShortUrlsHelper
 
   ### ATTRIBUTES ###############################
   # UrlAlias model has the following attributes:
@@ -41,6 +42,10 @@ class ShortUrl < ApplicationRecord
     # Searches for short URLs by redirect
     def reverse_search(search)
       where("redirect ILIKE ?", "%#{search}%")
+    end
+
+    # Generates a random slug
+    def random_slug(length = UrlGrey::Application.config.random_slug_length)
     end
   end
 

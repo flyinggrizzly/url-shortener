@@ -11,7 +11,7 @@ class SlugValidator < ActiveModel::EachValidator
   def validate_slug(value)
     if UrlGrey::Application.config.reserved_slugs.include? value
       return false
-    elsif value.match(/^([a-z0-9]+[-_]?+[a-z0-9]+)*$/i) # ensure all slugs include only a-z, 0-9, and - or _
+    elsif value.match(/^([a-z0-9]+([-_]?+[a-z0-9]+)?)*$/i) # ensure all slugs include only a-z, 0-9, and - or _
       return true
     else
       return false

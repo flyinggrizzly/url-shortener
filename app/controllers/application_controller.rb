@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  include SessionsHelper    # get access to the sessions helpers in all controllers
   include ApplicationHelper # force this to load earlier, mostly for tests
+  include SessionsHelper    # get access to the sessions helpers in all controllers
 
   def hello
     render html: "'Sup y'all?"
