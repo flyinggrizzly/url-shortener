@@ -46,6 +46,7 @@ class ShortUrl < ApplicationRecord
 
     # Generates a random slug
     def random_slug(length = UrlGrey::Application.config.random_slug_length)
+      
     end
   end
 
