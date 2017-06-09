@@ -1,10 +1,18 @@
-User.create!(name:                  ENV['ADMIN_NAME'],
-             email:                 ENV['ADMIN_EMAIL'],
-             admin:                 true,
-             password:              ENV['ADMIN_PASSWD'],
-             password_confirmation: ENV['ADMIN_PASSWRD'])
+if Rails.env.production?
+  User.create!(name:                  ENV['ADMIN_NAME'],
+               email:                 ENV['ADMIN_EMAIL'],
+               admin:                 true,
+               password:              ENV['ADMIN_PASSWD'],
+               password_confirmation: ENV['ADMIN_PASSWRD'])
+  ShortUrl.create!(slug: 'root', redirect: ENV['ROOT_REDIRECT_URL'])
+else
+  User.create!(name:                  'Great Cthulhu',
+               email:                 'og_old_one@lovecraft.net',
+               password:              'goofballgoofball',
+               password_confirmation: 'goofballgoofball')
+end
 
-ShortUrl.create!(slug: 'root', redirect: ENV['ROOT_REDIRECT_URL'])
+
 
 ShortUrl.create!(slug: '2osPc0Y', redirect: 'http://flyinggrizzly.io/2017/04/11/test-should-bring-joy-do/')
 
