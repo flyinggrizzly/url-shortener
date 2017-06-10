@@ -1,11 +1,18 @@
 <%= form_for(@short_url) do |f| %>
   <%= render partial: 'shared/error_messages', locals: { object: @short_url } %>
 
-  <%= f.label :slug, 'Short URL extension' %>
-  <%= f.text_field :slug %>
-
   <%= f.label :redirect, 'Redirecting to' %>
   <%= f.url_field :redirect %>
+  
+  <fieldset class="fieldset">
+  <legend>Short URL Slug</legend>
+    <%= f.check_box :random_slug %><%= f.label :random_slug, 'Use a random slug for this Short URL.' %>
+
+    <p><em>or</em></p>
+
+    <%= f.label :slug, 'Custom slug' %>
+    <%= f.text_field :slug %>  
+  </fieldset>
 
   <%= f.submit 'Save changes', class: 'button large' %>
 <% end %><!-- end `form_for(@short_url)` -->

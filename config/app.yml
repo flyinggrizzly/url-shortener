@@ -1,0 +1,11 @@
+# config/app.yml for rails-settings-cached
+defaults: &defaults
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -37,6 +37,12 @@ gem 'jbuilder',                  '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 
+# Use Radix for base-37 conversions
+gem 'radix'
+
+# Use Rails Settings for in-app configurable settings
+gem "rails-settings-cached"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

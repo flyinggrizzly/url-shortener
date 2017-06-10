@@ -139,6 +139,7 @@ GEM
     rack (2.0.3)
     rack-test (0.6.3)
       rack (>= 1.0)
+    radix (2.2.1)
     rails (5.1.1)
       actioncable (= 5.1.1)
       actionmailer (= 5.1.1)
@@ -160,6 +161,8 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-settings-cached (0.6.5)
+      rails (>= 4.2.0)
     railties (5.1.1)
       actionpack (= 5.1.1)
       activesupport (= 5.1.1)
@@ -251,8 +254,10 @@ DEPENDENCIES
   minitest-reporters (~> 1.1.9)
   pg (~> 0.18)
   puma (~> 3.7)
+  radix
   rails (~> 5.1.1)
   rails-controller-testing (~> 0.1.1)
+  rails-settings-cached
   sass-rails (~> 5.0)
   selenium-webdriver
   simplecov
