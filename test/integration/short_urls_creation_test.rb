@@ -43,4 +43,13 @@ class ShortUrlsCreationTest < ActionDispatch::IntegrationTest
                                                    redirect:    'https://www.google.com' } }
     end
   end
+
+  test 'random slugs do not overwrite custom slugs' do
+    slug = 'do-not-overwrite'
+    short_url = ShortUrl.new(slug:        slug,
+                             random_slug: '1',
+                             redirect:    'https://www.google.com')
+    short_url.save
+    assert_equal slug, short_url.reload.slug
+  end
 end
