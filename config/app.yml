@@ -1,7 +1,5 @@
 # config/app.yml for rails-settings-cached
 defaults: &defaults
-  foo: "Foo"
-  bar: 123
 
 development:
   <<: *defaults

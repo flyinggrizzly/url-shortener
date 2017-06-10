@@ -28,4 +28,19 @@ class ShortUrlsCreationTest < ActionDispatch::IntegrationTest
     assert_redirected_to short_urls_path
     assert_not flash.empty?
   end
+
+  test 'form has right fields' do
+    get new_short_url_path
+    assert_select 'input[name=?]', 'short_url[slug]'
+    assert_select 'input[name=?]', 'short_url[redirect]'
+    assert_select 'input[name=?]', 'short_url[random_slug]'
+  end
+
+  test 'random slugs are generated when requested' do
+    assert_difference 'ShortUrl.count', 1 do
+      post short_urls_path, params: { short_url: { slug:        '',
+                                                   random_slug: '1',
+                                                   redirect:    'https://www.google.com' } }
+    end
+  end
 end
