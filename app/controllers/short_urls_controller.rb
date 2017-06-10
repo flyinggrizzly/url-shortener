@@ -60,7 +60,7 @@ class ShortUrlsController < ApplicationController
     if ShortUrl.find_by(slug: params[:slug]) # Only permit redirect editing if the short URL exists
       params.require(:short_url).permit(:redirect)
     else
-      params.require(:short_url).permit(:slug, :redirect)
+      params.require(:short_url).permit(:slug, :random_slug, :redirect)
     end
   end
 
