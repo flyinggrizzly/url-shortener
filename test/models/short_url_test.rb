@@ -171,6 +171,7 @@ class ShortUrlTest < ActiveSupport::TestCase
     # Make sure the test database starts iterating over random slugs from the beginning
     AppConfig.current_random_slug = 0
 
+
     assert_equal UrlGrey::Application.config.random_slug_length, ShortUrl.random_slug.length
     assert_equal 2, ShortUrl.random_slug(2).length
   end

@@ -44,6 +44,7 @@ class ShortUrlsCreationTest < ActionDispatch::IntegrationTest
     end
   end
 
+
   test 'random slugs do not overwrite custom slugs' do
     slug = 'do-not-overwrite'
     short_url = ShortUrl.new(slug:        slug,
