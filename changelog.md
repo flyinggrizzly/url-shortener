@@ -1,5 +1,10 @@
 # Url Grey changelog
 
+## v 0.1.2
+
+- Add random slug generator for new short URLs
+- Add `app.json` file for automated setup tasks on Dokku
+
 ## v 0.1.1
 
 - Change Short URL resource to use short URL slugs in the URL as the parameter instead of the database ID

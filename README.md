@@ -65,8 +65,8 @@ To change this, first, mess around with the `before_action` filters in `users_co
 - [x] user creation, editing, display, deletion
 - [ ] password resets for existing users (currently would have to be done by an admin)
 - [ ] emailing users once created and prompting them to set passwords (currently set by admin)
-- [ ] implement shortening and redirection
-  - [ ] random short URL generation
+- [x] implement shortening and redirection
+  - [x] random short URL generation
   - [X] special root url redirect for super amazeballs vanity urls
   - [x] vanity/custom short URLs
   - [x] reserving application routes as slugs (though this could get better)
