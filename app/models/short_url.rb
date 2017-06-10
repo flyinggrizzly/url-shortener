@@ -11,6 +11,15 @@ class ShortUrl < ApplicationRecord
   # - updated_at:datetime
   ##############################################
 
+  # Virtual attribute for random slug handling
+  attr_accessor :random_slug
+
+# Filters
+  before_save :downcase_alias
+  before_save :ensure_scheme
+
+  before_validation :generate_random_slug
+
 
   # Validations
   validates :slug, presence:   true,
@@ -22,9 +31,7 @@ class ShortUrl < ApplicationRecord
                         length:   { maximum: 300 },
                         url:      true
 
-  # Filters
-  before_save :downcase_alias
-  before_save :ensure_scheme
+
 
   ###### Public methods ########################
 
@@ -32,7 +39,7 @@ class ShortUrl < ApplicationRecord
   def to_param
     slug
   end
-  
+
   class << self
     # Searches for short URL by slug
     def search(search)
@@ -50,6 +57,7 @@ class ShortUrl < ApplicationRecord
       if slug_id = AppConfig.current_random_slug
         # Generate the slug
         slug = base_37_convert(slug_id)
+        AppConfig.current_random_slug += 1
 
         # Pad out shorter slugs to meet length param
         while slug.length < length
@@ -58,10 +66,8 @@ class ShortUrl < ApplicationRecord
 
         # Make sure slug does not exist and doesn't include hyphens, or return it
         if slug.include?('-')
-          AppConfig.current_random_slug += 1
           random_slug(length)
         elsif ShortUrl.find_by(slug: slug)
-          AppConfig.current_random_slug += 1
           random_slug(length)
         else
           return slug
@@ -81,6 +87,8 @@ class ShortUrl < ApplicationRecord
     end
   end
 
+
+
   ###### Private methods #######################
 
   private
@@ -97,4 +105,10 @@ class ShortUrl < ApplicationRecord
     self.redirect.insert(0, 'http://') unless URI.parse(self.redirect).scheme
   end
 
+  # Creates a random slug if requested before validation
+  def generate_random_slug
+    if self.random_slug == '1'
+      self.slug = ShortUrl.random_slug
+    end
+  end
 end
