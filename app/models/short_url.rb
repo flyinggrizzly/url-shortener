@@ -107,7 +107,7 @@ class ShortUrl < ApplicationRecord
 
   # Creates a random slug if requested before validation
   def generate_random_slug
-    if self.random_slug == '1'
+    if self.random_slug == '1' && self.slug.empty?
       self.slug = ShortUrl.random_slug
     end
   end
