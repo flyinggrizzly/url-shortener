@@ -13,6 +13,7 @@ module UrlGrey
 
     # Customize your application's name
     config.application_name = 'URL Grey'
+    config.application_host = 'https://grz.li'
 
     # Optionally set '/' as a short URL. This will only have effect
     ## if the app can find a ShortUrl with slug 'root' to redirect to

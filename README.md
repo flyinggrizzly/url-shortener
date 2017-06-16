@@ -1,5 +1,6 @@
 # UrlGrey, Picard's favorite URL shortener
-### v 0.1.2
+
+### v 0.1.3
 
 ![tea, earl grey, hot!](picard-tea.gif)
 
@@ -31,7 +32,13 @@ If you want to reserve any URL slugs from use, do so in `config/initializers/res
 
 ### Configuration
 
-The app has some basic configurations that can/should be set in `config/application.rb` before deploying it for yourself. Currently, this is just to enable the special root url redirect, and to rename the application to suit your own tastes. Maybe you prefer coffee, and have some awesome coffee/URL pun instead of 'Url Grey'?
+The app has some basic configurations that should be set in `config/application.rb` before deploying it for yourself. Currently, this is just to enable the special root url redirect, and to rename the application to suit your own tastes. Maybe you prefer coffee, and have some awesome coffee/URL pun instead of 'Url Grey'?
+
+#### Required:
+
+- Set the application host: `config.application_host = 'https://your.domain'
+
+#### Optional
 
 - To rename the application, change: `config.application_name = 'URL Grey'`
 - To configure the root redirect, before deploying the app, change the first `ShortUrl` seed's redirect value
@@ -73,7 +80,7 @@ To change this, first, mess around with the `before_action` filters in `users_co
   - [x] redirection
 - [x] URL search and reverse search for checking if a short URL destination already exists, or if a slug is taken
 - [ ] move search into its own controller so results don't appear behind the `/admin` path (because they're visible to anonymous users)
-- [ ] disallow the applications own domain as a redirection destination (hello infinite loop!)
+- [x] disallow the applications own domain as a redirection destination (hello infinite loop!)
 - [ ] displaying short URL stats
   - [ ] number of hits
     - [ ] overall
