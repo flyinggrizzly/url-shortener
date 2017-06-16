@@ -199,4 +199,23 @@ class ShortUrlTest < ActiveSupport::TestCase
       assert_not ShortUrl.random_slug(2).include?('-')
     end
   end
+
+  test 'cannot redirect to application host' do
+    # Temporarily unset the application host value
+    # so tests remain agnostic of installation
+    real_app_host = UrlGrey::Application.config.application_host
+    UrlGrey::Application.config.application_host = 'http://www.google.com'
+
+    short_url = ShortUrl.new(slug: 'uh-oh', redirect: 'http://www.google.com')
+    assert_not short_url.valid?
+
+    short_url = ShortUrl.new(slug: 'still-bad', redirect: 'https://www.google.com')
+    assert_not short_url.valid?
+
+    short_url = ShortUrl.new(slug: 'really-still-not-ok', redirect: 'www.google.com')
+    assert_not short_url.valid?
+
+    # Reset the application host so tests are not order dependent
+    UrlGrey::Application.config.application_host = real_app_host
+  end
 end

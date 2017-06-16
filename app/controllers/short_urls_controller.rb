@@ -49,7 +49,7 @@ class ShortUrlsController < ApplicationController
   def destroy
     @short_url = ShortUrl.find_by(slug: params[:slug])
     @short_url.destroy
-    flash[:success] = "Short URL '#{@short_url.slug} has been deleted."
+    flash[:success] = "Short URL '#{@short_url.slug}' has been deleted."
     redirect_to short_urls_path
   end
 
