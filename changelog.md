@@ -1,5 +1,9 @@
 # Url Grey changelog
 
+## v 0.1.3
+
+- Protect the application's own domain from being redirected to, to avoid possible infinite loops or inaccessible application routes
+
 ## v 0.1.2
 
 - Add random slug generator for new short URLs

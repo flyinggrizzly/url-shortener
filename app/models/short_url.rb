@@ -27,9 +27,10 @@ class ShortUrl < ApplicationRecord
                    length:     { maximum: 255 },
                    slug:       true
 
-  validates :redirect,  presence: true,
-                        length:   { maximum: 300 },
-                        url:      true
+  validates :redirect,  presence:      true,
+                        length:        { maximum: 300 },
+                        url:           true,
+                        safe_redirect: true
 
 
 

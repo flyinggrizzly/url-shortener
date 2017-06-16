@@ -39,6 +39,8 @@ gem 'jbuilder',                  '~> 2.5'
 
 # Use Radix for base-37 conversions
 gem 'radix'
+# Use Addressable for URL parsing without schemes
+gem 'addressable'
 
 # Use Rails Settings for in-app configurable settings
 gem "rails-settings-cached"
