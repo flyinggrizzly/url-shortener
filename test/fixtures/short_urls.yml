@@ -1,5 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+
 example:
   slug: 'example'
   redirect:  'http://www.example.com/'
@@ -31,6 +32,10 @@ google-no-sub:
 google-no-sub-no-scheme:
   slug: 'no-sub-no-scheme'
   redirect:  'google.com/'
+
+hits_test:
+  slug: 'hits-test'
+  redirect: 'http://www.google.com'
 
 <% 30.times do |n| %>
 short_url_<%= n %>:

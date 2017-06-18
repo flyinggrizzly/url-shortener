@@ -36,6 +36,7 @@ en:
         url_format: "'%{value}' is not a valid URL"
         redirecting_to_app_host: "'%{value}' is not a permissible redirect"
         slug_format: "'%{value}' is not available as a short URL slug"
+        invalid_ip_address: "'%{value}' is not a valid IP address"
       models:
         short_url:
           attributes:
@@ -44,3 +45,8 @@ en:
               redirecting_to_app_host: "'%{value}' is not a permissible redirect"
             slug:
               slug_format: "'%{value}' is not available as a short URL slug"
+        short_url_hit:
+          attributes:
+            ip_address:
+              invalid_ip_address: "'%{value}' is not a valid IP address"
+              
