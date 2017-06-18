@@ -1,9 +1,5 @@
 # Notes about next steps
 
-## Set up app.json
-
-Need to add DB commands into pre(post?)deploy script. Also, need to understand when each are fired.
-
 ## Tracking short url uses
 
 Whenever a short URL is used, log it.

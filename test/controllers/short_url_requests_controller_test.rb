@@ -32,4 +32,19 @@ class ShortUrlRequestsControllerTest < ActionDispatch::IntegrationTest
     get "/#{camel_case_slug}"
     assert_redirected_to @real_short_url.redirect
   end
+
+  test 'hits are logged' do
+    assert_difference 'ShortUrlHit.count' do
+      get "/#{@real_short_url.slug}"
+      assert_redirected_to @real_short_url.redirect
+    end
+  end
+
+  test 'hits against root are logged' do
+    ShortUrl.create!(slug: 'root', redirect: 'http://flyinggrizzly.io')
+    assert_difference 'ShortUrlHit.count' do
+      get root_url
+      assert_redirected_to root_redirect_url
+    end
+  end
 end

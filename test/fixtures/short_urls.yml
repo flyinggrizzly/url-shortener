@@ -1,5 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+
 example:
   slug: 'example'
   redirect:  'http://www.example.com/'

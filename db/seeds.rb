@@ -6,6 +6,11 @@ if Rails.env.development?
                password_confirmation: 'goofballgoofball')
 
   ShortUrl.create!(slug: 'foo', redirect: 'https://www.google.com')
+
+  50.times do |n|
+    ShortUrl.create!(slug: "slug-#{n}", redirect: 'https://www.google.com')
+  end
+
 elsif Rails.env.production?
   User.create!(name:                  ENV['ADMIN_NAME'],
                email:                 ENV['ADMIN_EMAIL'],
@@ -62,7 +67,6 @@ elsif Rails.env.production?
 
   ShortUrl.create!(slug: '1alkdck', redirect: 'http://flyinggrizzly.io/blog/2015/4/12/the-mouse-is-your-enemy')
 
-  ShortUrl.create!(slug: '1Cxt1CJ', redirect: 'http://0.0.0.2/')
 
   ShortUrl.create!(slug: '1EockAD', redirect: 'http://stackoverflow.com/questions/160930/how-do-i-check-if-an-integer-is-even-or-odd')
 
