@@ -22,4 +22,11 @@ class ShortUrlHitTest < ActiveSupport::TestCase
       short_url_hit.save
     end
   end
+  
+  test 'count_in_period is accurate' do
+    # Ensure we have the right number of hits total first
+    short_url = short_urls(:hits_test)
+    assert_equal 100, short_url.hits.count
+    assert_equal 30, short_url.hits.count_last_30_days
+  end
 end

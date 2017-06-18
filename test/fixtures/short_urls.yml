@@ -33,6 +33,10 @@ google-no-sub-no-scheme:
   slug: 'no-sub-no-scheme'
   redirect:  'google.com/'
 
+hits_test:
+  slug: 'hits-test'
+  redirect: 'http://www.google.com'
+
 <% 30.times do |n| %>
 short_url_<%= n %>:
   slug: alias_<%= n %>

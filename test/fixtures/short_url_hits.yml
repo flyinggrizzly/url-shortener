@@ -1,11 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  ip_address: MyString
-  user_agent: MyString
-  short_url: example
-
-two:
-  ip_address: MyString
-  user_agent: MyString
-  short_url: google
+# Create 100 days of hits on a short url, 1 per hour, so we can test
+# time delimiting ShortUrlHit.count_in_period in
+# short_url_hit_test.rb
+<% 100.times do |n| %>
+  hit-<%= n %>:
+    short_url:  hits_test
+    ip_address: '192.168.1.<%= n %>'
+    user_agent: 'chrome'
+    created_at: <%= n.days.ago %>
+<% end %>
