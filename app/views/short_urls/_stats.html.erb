@@ -1,0 +1,14 @@
+<fieldset class="fieldset">
+  <legend>Stats for short URL '<%= @short_url.slug %>'</legend>
+
+  <div class="short-url-stats">
+    <div class="short-url-stat">
+      <span class="stat-gloss">Hits in last month:</span>
+      <span class="stat-entry"><%= @short_url.hits.count_last_30_days %></span>
+    </div>
+    <div class="short-url-stat">
+      <span class="stat-gloss">Hits since creation:</span>
+      <span class="stat-entry"><%= @short_url.hits.count %></span>
+    </div>
+  </div>
+</fieldset>

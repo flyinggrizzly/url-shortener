@@ -1,5 +1,6 @@
 <li class="short_url" id="short_url-<%= short_url.id %>">
   <h3><%= link_to short_url.slug, short_url_path(short_url) %></h3>
+
   <p>Redirects to <%= link_to short_url.redirect, short_url.redirect %>.</p>
   <ul class="short_url--edit menu">
     <li>

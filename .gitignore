@@ -4,6 +4,10 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Ignore local files
+**/.DS_Store
+todo.md
+
 # Ignore bundler config.
 /.bundle
 
@@ -28,3 +32,4 @@ coverage/*
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+ 
