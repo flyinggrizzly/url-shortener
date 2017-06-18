@@ -1,5 +1,10 @@
 # Url Grey changelog
 
+## v 0.2.0
+
+- Switch to [semantic versioning](http://semver.org)
+- Start tracking short URL usage stats, and render basic usage in show view
+
 ## v 0.1.3
 
 - Protect the application's own domain from being redirected to, to avoid possible infinite loops or inaccessible application routes

@@ -1,6 +1,6 @@
 # UrlGrey, Picard's favorite URL shortener
 
-### v 0.1.3
+### v 0.2.0
 
 ![tea, earl grey, hot!](picard-tea.gif)
 
