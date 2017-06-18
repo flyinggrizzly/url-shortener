@@ -11,3 +11,5 @@
     <%= link_to 'Delete', [:delete, @short_url], method: :delete, data: { confirm: 'Are you sure?' }, class: 'button alert' %>
   </li>
 </ul>
+
+<%= render 'short_urls/stats' %>

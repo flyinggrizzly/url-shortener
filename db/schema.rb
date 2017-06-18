@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609185412) do
+ActiveRecord::Schema.define(version: 20170617201146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20170609185412) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
+  end
+
+  create_table "short_url_hits", force: :cascade do |t|
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "short_url_id"
+    t.index ["short_url_id"], name: "index_short_url_hits_on_short_url_id"
   end
 
   create_table "short_urls", force: :cascade do |t|
@@ -43,4 +52,5 @@ ActiveRecord::Schema.define(version: 20170609185412) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "short_url_hits", "short_urls"
 end

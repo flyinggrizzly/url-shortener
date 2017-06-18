@@ -3,13 +3,16 @@ class ShortUrl < ApplicationRecord
   require 'radix'
 
   ### ATTRIBUTES ###############################
-  # UrlAlias model has the following attributes:
+  # ShortUrl model has the following attributes:
   # - (id:int)
-  # - slug:string,   INDEXED
-  # - redirect:text,      INDEXED
+  # - slug:string,              INDEXED
+  # - redirect:text,            INDEXED
   # - created_at:datetime
   # - updated_at:datetime
   ##############################################
+
+  has_many :hits, class_name: 'ShortUrlHit',
+                  dependent:  :destroy
 
   # Virtual attribute for random slug handling
   attr_accessor :random_slug
