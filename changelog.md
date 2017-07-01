@@ -1,8 +1,9 @@
 # Url Grey changelog
 
-## staging
+## v 0.3.0
 
 - normal users can create and display short urls
+- use [`paper_trail`](https://github.com/airblade/paper_trail) to track Short URL changes
 
 ## v 0.2.0
 
