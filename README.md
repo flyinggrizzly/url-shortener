@@ -1,6 +1,6 @@
 # UrlGrey, Picard's favorite URL shortener
 
-### v 0.2.0
+### v 0.3.0
 
 ![tea, earl grey, hot!](picard-tea.gif)
 
@@ -12,7 +12,8 @@
 
 UrlGrey is a URL shortener written in Rails 5, backed by PostGres (or whatever you want, just change `database.yml`). The best part is its ability to redirect the root URL to allow for a bare domain vanity URL (try hitting https://grz.li and see where it takes you!).
 
-[Changelog](changelog.md).
+[Release notes](http://flyinggrizzly.io/url-grey/)
+[Changelog](changelog.md)
 
 ## Setup
 
@@ -82,14 +83,14 @@ To change this, first, mess around with the `before_action` filters in `users_co
 - [ ] move search into its own controller so results don't appear behind the `/admin` path (because they're visible to anonymous users)
 - [x] disallow the applications own domain as a redirection destination (hello infinite loop!)
 - [ ] displaying short URL stats
-  - [ ] number of hits
-    - [ ] overall
-    - [ ] in last month
+  - [x] number of hits
+    - [x] overall
+    - [x] in last month
   - [ ] graph of usage over time
   - [ ] most popular short URLs
   - [ ] source of traffic
 - [ ] clean up layouts so they're more consistent with columns
-- [ ] discvovery and implementation of a more programmatic way of excluding anything in the application's routes from being set as a short URL slug
+- [ ] refactor root url redirection to use a config screen and the app settings database table
 
 ## License
 

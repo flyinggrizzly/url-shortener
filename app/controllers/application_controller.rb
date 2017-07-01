@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   include SessionsHelper     # get access to the sessions helpers in all controllers
   include ShortUrlHitsHelper # get access to the record_hit method
 
+  before_action :set_paper_trail_whodunnit
+
   def root
     if root_redirect_enabled? && root_redirect_url
       # Explicitly pass the slug used because

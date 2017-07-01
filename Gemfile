@@ -45,6 +45,9 @@ gem 'addressable'
 # Use Rails Settings for in-app configurable settings
 gem "rails-settings-cached"
 
+# Use papertrail for versioning
+gem 'paper_trail',               '~> 7.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

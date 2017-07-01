@@ -13,10 +13,10 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'normal users cannot get index' do
+  test 'normal users can get index' do
     log_in_as(@user)
     get short_urls_path
-    assert_redirected_to root_or_admin_url
+    assert_response :success
   end
 
   test 'admins can get show' do
@@ -25,10 +25,10 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'normal users cannot get show' do
+  test 'normal users can get show' do
     log_in_as(@user)
     get short_url_path(@short_url)
-    assert_redirected_to root_or_admin_url
+    assert_response :success
   end
 
   test 'admins can get new' do
@@ -37,10 +37,10 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'normal users cannot get new' do
+  test 'normal users can get new' do
     log_in_as(@user)
     get new_short_url_path
-    assert_redirected_to root_or_admin_url
+    assert_response :success
   end
 
   test 'admins can create short urls' do
@@ -51,13 +51,12 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test 'normal users cannot create short urls' do
+  test 'normal users can create short urls' do
     log_in_as(@user)
-    assert_no_difference 'ShortUrl.count' do
+    assert_difference 'ShortUrl.count' do
       post short_urls_path, params: { short_url: { slug: 'foo',
                                                    redirect:  'http://www.google.com' } }
     end
-    assert_redirected_to root_or_admin_url
   end
 
   test 'bad short url params are not saved and rerender form' do
@@ -96,14 +95,6 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     assert_equal new_redirect,  @short_url.reload.redirect
   end
 
-  test 'cannot change slug when editing' do
-    log_in_as(@admin)
-    old_slug = @short_url.slug
-    new_slug = 'zomg'
-    patch short_url_path(@short_url), params: { short_url: { slug: new_slug } }
-    assert_equal old_slug, @short_url.reload.slug
-  end
-
   test 'normal users cannot patch update' do
     log_in_as(@user)
     new_alias    = 'zomg'
@@ -112,6 +103,14 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
                                                              redirect:  new_redirect } }
     assert_not_equal new_alias,    @short_url.reload.slug
     assert_not_equal new_redirect, @short_url.reload.redirect
+  end
+
+  test 'cannot change slug when editing' do
+    log_in_as(@admin)
+    old_slug = @short_url.slug
+    new_slug = 'zomg'
+    patch short_url_path(@short_url), params: { short_url: { slug: new_slug } }
+    assert_equal old_slug, @short_url.reload.slug
   end
 
   test 'admins can get delete' do
@@ -192,5 +191,42 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     # Delete
     assert_includes     delete_short_url_path(@short_url), @short_url.slug
     assert_not_includes delete_short_url_path(@short_url), @short_url.id.to_s
+  end
+
+  test 'create has papertrail' do
+    with_versioning do
+      log_in_as(@user)
+      post short_urls_path, params: { short_url: { slug:      'versioned_create',
+                                                   redirect:  'http://www.google.com' } }
+      short_url = ShortUrl.find_by(slug: 'versioned_create')
+      assert short_url.versions
+      assert_equal @user.id.to_s, short_url.versions.last.whodunnit
+    end
+  end
+
+  test 'update has papertrail' do
+    with_versioning do
+      log_in_as(@admin)
+      old_url = @short_url
+      patch short_url_path(@short_url), params: { short_url: { redirect: 'https://github.com/airblade/paper_trail' } }
+      assert @short_url.versions
+      assert_equal old_url, @short_url.versions.last.reify
+      assert_equal @admin.id.to_s, @short_url.versions.last.whodunnit
+    end
+  end
+
+  test 'destroy has papertrail' do
+    with_versioning do
+      log_in_as(@admin)
+      short_url = ShortUrl.new(slug: 'versioned_destroy', redirect: 'https://github.com/airblade/paper_trail')
+      short_url.save
+
+      old_url = short_url
+      delete short_url_path(short_url)
+
+      assert_equal "destroy", short_url.versions.last.event
+      assert_equal old_url, short_url.versions.last.reify
+      assert_equal @admin.id.to_s, short_url.versions.last.whodunnit
+    end
   end
 end

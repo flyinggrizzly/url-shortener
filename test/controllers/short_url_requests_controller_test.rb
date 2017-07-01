@@ -44,7 +44,8 @@ class ShortUrlRequestsControllerTest < ActionDispatch::IntegrationTest
     ShortUrl.create!(slug: 'root', redirect: 'http://flyinggrizzly.io')
     assert_difference 'ShortUrlHit.count' do
       get root_url
-      assert_redirected_to root_redirect_url
     end
+    get root_url
+    assert_redirected_to root_redirect_url
   end
 end

@@ -2,12 +2,14 @@
   <h3><%= link_to short_url.slug, short_url_path(short_url) %></h3>
 
   <p>Redirects to <%= link_to short_url.redirect, short_url.redirect %>.</p>
-  <ul class="short_url--edit menu">
-    <li>
-      <%= link_to 'Edit',   edit_short_url_path(short_url),   class: 'button' %>
-    </li>
-    <li>
-      <%= link_to 'Delete', [:delete, short_url], method: :delete, data: { confirm: 'Are you sure?' } %>
-    </li>
-  </ul>
+  <% if logged_in? && current_user.admin? %>
+    <ul class="short_url--edit menu">
+      <li>
+        <%= link_to 'Edit',   edit_short_url_path(short_url),   class: 'button' %>
+      </li>
+      <li>
+        <%= link_to 'Delete', [:delete, short_url], method: :delete, data: { confirm: 'Are you sure?' }, class: 'dragons' %>
+      </li>
+    </ul>
+  <% end %>
 </li>
