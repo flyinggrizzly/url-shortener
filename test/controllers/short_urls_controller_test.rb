@@ -192,4 +192,36 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     assert_includes     delete_short_url_path(@short_url), @short_url.slug
     assert_not_includes delete_short_url_path(@short_url), @short_url.id.to_s
   end
+
+  test 'create has papertrail' do
+    with_versioning do
+      log_in_as(@user)
+      short_url = ShortUrl.new(slug: 'versioned', redirect: 'https://github.com/airblade/paper_trail')
+      short_url.save
+      assert short_url.reload.versions
+    end
+  end
+
+  test 'update has papertrail' do
+    with_versioning do
+      log_in_as(@admin)
+      old_url = @short_url
+      @short_url.redirect = 'https://github.com/airblade/paper_trail'
+      @short_url.save
+      assert @short_url.versions
+      assert_equal old_url, @short_url.versions.last.reify
+    end
+  end
+
+  test 'destroy has papertrail' do
+    with_versioning do
+      short_url = ShortUrl.new(slug: 'versioned', redirect: 'https://github.com/airblade/paper_trail')
+      short_url.save
+      
+      old_url = short_url
+      short_url.destroy
+      assert_equal "destroy", short_url.versions.last.event
+      assert_equal old_url, short_url.versions.last.reify
+    end
+  end
 end

@@ -11,6 +11,7 @@ class ShortUrl < ApplicationRecord
   # - updated_at:datetime
   ##############################################
 
+  has_paper_trail
   has_many :hits, class_name: 'ShortUrlHit',
                   dependent:  :destroy
 

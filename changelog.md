@@ -1,5 +1,9 @@
 # Url Grey changelog
 
+## staging
+
+- normal users can create and display short urls
+
 ## v 0.2.0
 
 - Switch to [semantic versioning](http://semver.org)
