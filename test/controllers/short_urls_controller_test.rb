@@ -13,10 +13,10 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'normal users cannot get index' do
+  test 'normal users can get index' do
     log_in_as(@user)
     get short_urls_path
-    assert_redirected_to root_or_admin_url
+    assert_response :success
   end
 
   test 'admins can get show' do
@@ -25,10 +25,10 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'normal users cannot get show' do
+  test 'normal users can get show' do
     log_in_as(@user)
     get short_url_path(@short_url)
-    assert_redirected_to root_or_admin_url
+    assert_response :success
   end
 
   test 'admins can get new' do
@@ -37,10 +37,10 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'normal users cannot get new' do
+  test 'normal users can get new' do
     log_in_as(@user)
     get new_short_url_path
-    assert_redirected_to root_or_admin_url
+    assert_response :success
   end
 
   test 'admins can create short urls' do
@@ -51,13 +51,12 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test 'normal users cannot create short urls' do
+  test 'normal users can create short urls' do
     log_in_as(@user)
-    assert_no_difference 'ShortUrl.count' do
+    assert_difference 'ShortUrl.count' do
       post short_urls_path, params: { short_url: { slug: 'foo',
                                                    redirect:  'http://www.google.com' } }
     end
-    assert_redirected_to root_or_admin_url
   end
 
   test 'bad short url params are not saved and rerender form' do
@@ -96,14 +95,6 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     assert_equal new_redirect,  @short_url.reload.redirect
   end
 
-  test 'cannot change slug when editing' do
-    log_in_as(@admin)
-    old_slug = @short_url.slug
-    new_slug = 'zomg'
-    patch short_url_path(@short_url), params: { short_url: { slug: new_slug } }
-    assert_equal old_slug, @short_url.reload.slug
-  end
-
   test 'normal users cannot patch update' do
     log_in_as(@user)
     new_alias    = 'zomg'
@@ -112,6 +103,14 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
                                                              redirect:  new_redirect } }
     assert_not_equal new_alias,    @short_url.reload.slug
     assert_not_equal new_redirect, @short_url.reload.redirect
+  end
+
+  test 'cannot change slug when editing' do
+    log_in_as(@admin)
+    old_slug = @short_url.slug
+    new_slug = 'zomg'
+    patch short_url_path(@short_url), params: { short_url: { slug: new_slug } }
+    assert_equal old_slug, @short_url.reload.slug
   end
 
   test 'admins can get delete' do
