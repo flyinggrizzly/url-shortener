@@ -196,9 +196,11 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
   test 'create has papertrail' do
     with_versioning do
       log_in_as(@user)
-      short_url = ShortUrl.new(slug: 'versioned', redirect: 'https://github.com/airblade/paper_trail')
-      short_url.save
-      assert short_url.reload.versions
+      post short_urls_path, params: { short_url: { slug:      'versioned_create',
+                                                   redirect:  'http://www.google.com' } }
+      short_url = ShortUrl.find_by(slug: 'versioned_create')
+      assert short_url.versions
+      assert_equal @user.id.to_s, short_url.versions.last.whodunnit
     end
   end
 
@@ -206,22 +208,25 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
     with_versioning do
       log_in_as(@admin)
       old_url = @short_url
-      @short_url.redirect = 'https://github.com/airblade/paper_trail'
-      @short_url.save
+      patch short_url_path(@short_url), params: { short_url: { redirect: 'https://github.com/airblade/paper_trail' } }
       assert @short_url.versions
       assert_equal old_url, @short_url.versions.last.reify
+      assert_equal @admin.id.to_s, @short_url.versions.last.whodunnit
     end
   end
 
   test 'destroy has papertrail' do
     with_versioning do
-      short_url = ShortUrl.new(slug: 'versioned', redirect: 'https://github.com/airblade/paper_trail')
+      log_in_as(@admin)
+      short_url = ShortUrl.new(slug: 'versioned_destroy', redirect: 'https://github.com/airblade/paper_trail')
       short_url.save
-      
+
       old_url = short_url
-      short_url.destroy
+      delete short_url_path(short_url)
+
       assert_equal "destroy", short_url.versions.last.event
       assert_equal old_url, short_url.versions.last.reify
+      assert_equal @admin.id.to_s, short_url.versions.last.whodunnit
     end
   end
 end
