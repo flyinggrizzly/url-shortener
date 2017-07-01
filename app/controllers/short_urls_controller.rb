@@ -1,6 +1,6 @@
 class ShortUrlsController < ApplicationController
   before_action :logged_in_user, except: [:search]
-  before_action :admin_user,     except: [:search]
+  before_action :admin_user,     only:   [:edit, :update, :delete, :destroy]
 
   def index
     @short_urls = ShortUrl.paginate(page: params[:page])
