@@ -2,7 +2,7 @@
   <h3><%= link_to short_url.slug, short_url_path(short_url) %></h3>
 
   <p>Redirects to <%= link_to short_url.redirect, short_url.redirect %>.</p>
-  <% if current_user.admin? %>
+  <% if logged_in? && current_user.admin? %>
     <ul class="short_url--edit menu">
       <li>
         <%= link_to 'Edit',   edit_short_url_path(short_url),   class: 'button' %>
