@@ -1,6 +1,10 @@
 class ShortUrlsController < ApplicationController
   before_action :logged_in_user, except: [:search]
-  before_action :admin_user,     only:   [:edit, :update, :delete, :destroy]
+  before_action :admin_user,     only:   [:edit,
+                                          :update,
+                                          :delete,
+                                          :destroy,
+                                          :many_new]
 
   def index
     @short_urls = ShortUrl.paginate(page: params[:page])
@@ -11,12 +15,20 @@ class ShortUrlsController < ApplicationController
   end
 
   def show
-    @short_url = ShortUrl.find_by(slug: params[:slug])
+    if @short_url = ShortUrl.find_by(slug: params[:slug])
+      @short_url
+    else
+      flash[:warn] = 'That short URL does not exist.'
+      redirect_to root_or_admin_url
+    end
   end
 
   def new
     @short_url = ShortUrl.new
   end
+
+  # Renders form to upload many new short URLs
+  def batch_new; end
 
   def create
     @short_url = ShortUrl.new(short_url_params)
@@ -26,6 +38,21 @@ class ShortUrlsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  # Create and update short URLs in a batch
+  def batch_create_and_update
+    short_urls = read_batch_csv
+    urls_to_update, urls_to_create = identify_action_for_record(short_urls)
+    
+    urls_to_create.each { |url| ShortUrl.create!(slug: url[0], redirect: url[1]) }
+
+    urls_to_update.each do |url|
+      short_url = ShortUrl.find_by(slug: url[0])
+      short_url.update_attribute(redirect: url[1])
+    end
+
+    # TODO: how the frack do I capture and render the records that didn't pass validation? Check RailsCast 165
   end
 
   def edit
@@ -62,6 +89,28 @@ class ShortUrlsController < ApplicationController
     else
       params.require(:short_url).permit(:slug, :random_slug, :redirect)
     end
+  end
+
+  # Returns two arrays: one of short URLs to update, one of short URLs to create
+  def identify_action_for_record(short_urls)
+    short_urls.each do |short_url|
+      if ShortUrl.find_by(slug: short_url[0])
+        updates << short_url
+      else
+        creates << short_url
+      end
+    end
+    return updates, creates
+  end
+
+  # Reads and parses CSV for batch operation
+  def read_batch_csv
+    CSV.read(params[short_urls_csv_params])
+  end
+
+  # Accepts CSV files and sanitizes them for creating many short URLs
+  def short_urls_csv_params
+    params.require(:short_urls_csv).permit(:short_urls_csv)
   end
 
   # Performs search or reverse search based on request

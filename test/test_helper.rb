@@ -21,6 +21,10 @@ class ActiveSupport::TestCase
     session[:user_id] = user.id
   end
 
+  def log_out
+    session[:user_id] = nil
+  end
+
   # Enables PaperTrail for specific tests
   def with_versioning
     was_enabled = PaperTrail.enabled?

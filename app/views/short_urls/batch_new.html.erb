@@ -1,0 +1,17 @@
+<%= provide(:title, 'Add Multiple Short URLs') %>
+
+<div class="column small-8 small-offset-2">
+  <h2>Create or update multiple Short URLs</h2>
+
+  <p>Upload a CSV of short URL slugs and redirects. This should be in the form of <code>slug, redirect</code>.</p>
+
+  <p>If there are any slugs that already exist, <em>they will be overwritten and updated.</em> Be forewarned!</p>
+
+  <fieldset class="fieldset">
+    <legend>Upload a CSV to create or update multiple short URLs</legend>
+    <%= form_tag many_new_short_urls_path do %>
+      <%= file_field_tag :short_urls_csv %>
+      <%= submit_tag 'Create short URLs', class: 'button' %>
+    <% end %>
+  </fieldset>
+</div><!-- end .column -->

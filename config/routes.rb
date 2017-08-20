@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   scope '/admin' do
     resources :users
+    # Expose screen for creating many short URLs
+    get 'short-urls/many-new', to: 'short_urls#many_new'
+
+    # Use short URL slug as id in URL
     resources :short_urls, param: :slug, path: 'short-urls' do
       get 'search', on: :collection
     end
