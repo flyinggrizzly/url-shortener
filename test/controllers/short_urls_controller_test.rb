@@ -229,27 +229,4 @@ class ShortUrlsControllerTest < ActionDispatch::IntegrationTest
       assert_equal @admin.id.to_s, short_url.versions.last.whodunnit
     end
   end
-
-  test 'admin can access create many screen' do
-    log_in_as(@admin)
-    get many_new_short_urls_path
-    assert_response :success
-    # assert_select 'input[type=button]#upload_csv'
-    log_out
-  end
-
-  test 'non admin cannot access create many screen' do
-    # accessing fixture directly rather than from set up because
-    # the @user var from setup keeps throwing errors when
-    # used here
-    log_in_as(@user)
-    get many_new_short_urls_path
-    assert_response :redirect
-    log_out
-  end
-
-  test 'logged out users cannot access create many screen' do
-    get many_new_short_urls_path
-    assert_response :redirect
-  end
 end

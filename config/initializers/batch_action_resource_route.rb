@@ -2,10 +2,11 @@ module BatchActionResourceRoute
   def resources(*args, &block)
     super(*args) do
       yield if block_given?
-      member do
-        get  :batch_new
-        post :batch, action: :batch_create_and_update
-      end
+        collection do
+          get  :batch
+          post :batch, action: :batch_edit_and_new
+          put  :batch_update_and_create
+        end
     end
   end
 end
