@@ -51,4 +51,24 @@ RSpec.describe User, type: :model do
   describe '::digest' do
     pending
   end
+
+  describe '::new_token' do
+    pending
+  end
+
+  describe '#remember' do
+    pending
+  end
+
+  describe '#forget' do
+    pending
+  end
+
+  describe '#authenticated?(token)' do
+    pending
+  end
+
+  describe '#downcase_email' do
+    pending
+  end
 end
