@@ -18,17 +18,24 @@ RSpec.describe User, type: :model do
   end
 
   it 'is invalid without name' do
-    user = User.new(user_details(name: ' '))
+    user = User.new(user_details(name: nil))
     expect(user).not_to be_valid
   end
 
   it 'is invalid without an email' do
-    user = User.new(user_details(email: ' '))
+    user = User.new(user_details(email: nil))
     expect(user).not_to be_valid
   end
 
   it 'is invalid without a password' do
     user = User.new(user_details(password: nil))
+    expect(user).not_to be_valid
+  end
+
+  it 'is invalid with a mismatched password confirmation' do
+    # The has_secure_password Rails helper will ignore the password confirmation
+    # if it receives nil from the field, therefore we must test a mis-match
+    user = User.new(user_details(password_confirmation: 'nomatch'))
     expect(user).not_to be_valid
   end
 

@@ -13,12 +13,10 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
 
-  <% if current_user.admin? %>
-    <fieldset class="fieldset dragons">
-      <legend>Here there be dragons!</legend>
-      <%= f.check_box :admin %><%= f.label :admin, 'Make this user an admin?' %>
-    </fieldset>
-  <% end %>
+  <fieldset class="fieldset dragons">
+    <legend>Here there be dragons!</legend>
+    <%= f.check_box :admin %><%= f.label :admin, 'Make this user an admin?' %>
+  </fieldset>
 
   <%= f.submit 'Save changes', class: 'button large' %>
 <% end %><!-- end `form_for(@user)` -->
