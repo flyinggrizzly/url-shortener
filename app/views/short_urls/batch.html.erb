@@ -9,7 +9,7 @@
 
   <fieldset class="fieldset">
     <legend>Upload a CSV to create or update multiple short URLs</legend>
-    <%= form_tag batch_short_urls_path do %>
+    <%= form_tag batch_short_urls_path, multipart: true do %>
       <%= file_field_tag :short_urls_csv %>
       <%= submit_tag 'Create short URLs', class: 'button' %>
     <% end %>

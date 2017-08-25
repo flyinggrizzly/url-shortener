@@ -3,40 +3,42 @@
 <div class="column small-8 small-offset-2">
   <h2>Confirm changes and creations of short URLs</h2>
 
-  <p>These are lists of all the short URLs you have uploaded. The first list is of short URLs that <em>already exist</em> will be changed; the second is of short URLs that will be created.</p>
+  <p>These are lists of all the short URLs you have uploaded. The first list is of short URLs that <em>already exist</em> whose redirects will be changed; the second is the list of short URLs that will be created.</p>
 
   <%= form_tag batch_update_and_create_short_urls_path, method: :put do %>
     <fieldset class="fieldset" id="short-urls-to-update">
       <legend>Short URLs to update</legend>
       <ul>
-        <% @urls_to_update.each do |url| %>
-          <li>
-            <%= fields_for "short_urls[]", url['record'] do |f| %>
+        <% @updates.each do |url| %>
+          <li class="short_url short_urls">
+            <%= fields_for "short_urls[]", url do |f| %>
               <%= render partial: 'shared/error_messages', locals: { object: url } %>
-              <span>Slug: <%= url['record'].slug %></span>
+              <span><strong><%= url.slug %></strong></span>
               <%= f.label :redirect, 'Redirecting to' %>
-              <%= f.url_field :redirect, value: url['new_redirect'] %>
+              <%= f.url_field :redirect, value: url.redirect %>
             <% end %>
           </li>
         <% end %>
       </ul>
     </fieldset>
 
-    <fieldset class="fieldset" id="short-urls-to-create">
+    <fieldset class="fieldset short_urls">
       <legend>Short URLs to create</legend>
-      // <% @urls_to_create.each_with_index do |url, index| %>
-      //   <%= fields_for "short_urls[]", index do |f| %>
-      //     <%= render partial: 'shared/error_messages', locals: { object: url } %>
-
-      //     <%= f.label :slug %>
-      //     <%= f.text_field :slug %>
-
-      //     <%= f.label :redirect, 'Redirecting to' %>
-      //     <%= f.url_field :redirect %>
-      //   <% end %>
-      // <% end %>
+      <ul>
+        <% @creates.each do |url| %>
+          <li>
+            <%= fields_for "short_urls[]", url do |f| %>
+              <%= render partial: 'shared/error_messages', locals: { object: url } %>
+              <%= f.label :slug %>
+              <%= f.text_field :slug %>
+              <%= f.label :redirect %>
+              <%= f.text_field :redirect %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </fieldset>
 
-    <%= submit_tag "Submit short URLs for update and creation" %>
+    <%= submit_tag "Submit short URLs for update and creation", class: 'button' %>
   <% end %>
 </div><!-- end .column -->

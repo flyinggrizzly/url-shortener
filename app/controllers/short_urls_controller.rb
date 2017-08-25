@@ -1,5 +1,5 @@
 class ShortUrlsController < ApplicationController
-  include BatchOperation
+  include Batchable
 
   before_action :logged_in_user, except: [:search]
   before_action :admin_user,     only:   [:edit,
@@ -37,6 +37,10 @@ class ShortUrlsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def edit
+    @short_url = ShortUrl.find_by(slug: params[:slug])
   end
 
   def update
