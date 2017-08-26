@@ -27,7 +27,7 @@
       <legend>Short URLs to create</legend>
       <ul>
         <% @creates.each do |url| %>
-          <li>
+          <li class="short_url short_urls">
             <%= fields_for "short_urls_to_create[]", url do |f| %>
               <%= render partial: 'shared/error_messages', locals: { object: url } %>
               <%= f.label :slug %>
@@ -43,5 +43,3 @@
     <%= submit_tag "Submit short URLs for update and creation", class: 'button' %>
   <% end %>
 </div><!-- end .column -->
-
-<% console %>

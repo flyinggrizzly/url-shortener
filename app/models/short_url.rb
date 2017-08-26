@@ -88,6 +88,16 @@ class ShortUrl < ApplicationRecord
       base_37_alphabet = %w[0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z -]
       number.b(10).to_s(base_37_alphabet)
     end
+
+    # Validates a single attribute
+    def valid_attribute?(attr, value)
+      mock = self.new(attr => value)
+      if mock.valid?
+        true
+      else
+        !mock.errors.has_key?(attr)
+      end
+    end
   end
 
 

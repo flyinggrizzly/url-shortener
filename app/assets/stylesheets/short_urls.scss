@@ -27,7 +27,7 @@
   }
 }
 .short_url {
-  padding: 20px;
+  padding-bottom: 10px;
   margin-bottom: 20px;
   border-bottom: 1px solid lightgrey;
   .menu li h5 a {
@@ -37,9 +37,9 @@
       text-decoration: underline;
     }
   }
-  .button {
-    margin-right: 10px;
-  }
+}
+.button {
+  margin-right: 10px;
 }
 ul.short_url--edit.short_url.menu {
   padding-left: 0 !important;

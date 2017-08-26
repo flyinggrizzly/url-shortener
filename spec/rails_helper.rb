@@ -54,4 +54,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Enable testing with anonymous controllers for concern specs
+  config.infer_base_class_for_anonymous_controllers = true
 end

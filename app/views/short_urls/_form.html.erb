@@ -14,5 +14,5 @@
     <%= f.text_field :slug %>  
   </fieldset>
 
-  <%= f.submit 'Save changes', class: 'button large' %>
+  <%= f.submit 'Save changes', class: 'button' %> <%= link_to 'Batch update and create', batch_short_urls_path, class: 'button' %>
 <% end %><!-- end `form_for(@short_url)` -->
