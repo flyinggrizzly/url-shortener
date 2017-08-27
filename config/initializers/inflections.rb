@@ -14,3 +14,7 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.plural    'was', 'were'
+  inflect.singular  'were', 'was'
+end

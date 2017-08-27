@@ -36,13 +36,14 @@ module Batchable
     else
       # Handle updates
       if short_urls_to_update
-        short_urls_to_update.keys.each do |key|
-          attributes = short_urls_to_update[key]
-          short_url = ShortUrl.find_by(slug: key.to_s)
-          if ShortUrl.valid_attribute?(:redirect, attributes[:redirect])
-            short_url.update_attribute(:redirect, attributes[:redirect])
-            # We need to say this one succeeded
-            updated_slugs_to_flash << key.to_s
+        # @updates = ShortUrl.batch_update_redirects(short_urls_to_update.values)
+        short_urls_to_update.values.each do |attributes|
+          # attributes = short_urls_to_update[key]
+          short_url = ShortUrl.find_by(slug: attributes[:slug])
+          short_url.redirect = attributes[:redirect]
+          if short_url.save
+            # We need to flash this one succeeded
+            updated_slugs_to_flash << attributes[:slug]
           else
             # or we need to save it for the user to try again after fixing it
             @updates << short_url 
@@ -52,11 +53,12 @@ module Batchable
 
       # Handle creations
       if short_urls_to_create
-        short_urls_to_create.keys.each do |key|
-          attributes = short_urls_to_create[key]
+        # @creates = ShortUrl.batch_create(short_urls_to_create.values)
+        short_urls_to_create.values.each do |attributes|
+          # attributes = short_urls_to_create[key]
           short_url = ShortUrl.new(slug: attributes[:slug], redirect: attributes[:redirect])
           if short_url.save
-            # We need to say this one succeeded
+            # We need to flash this one succeeded
             created_slugs_to_flash << attributes[:slug]
           else
             # or we need to save it for the user to try again after fixing it
@@ -144,6 +146,11 @@ module Batchable
       created_slugs_string = created_slugs.join("', '").insert(0, "'").insert(-1, "'")
       flash_created = "Short #{'URL'.pluralize(created_slugs.size)} #{created_slugs_string} #{'was'.pluralize(created_slugs.size)} created."
     end
-    flash[:success] = [flash_updated, flash_created].reject(&:blank?).join(' ')
+
+    if updated_slugs.empty? && created_slugs.empty?
+      flash.delete(:success)
+    else
+      flash[:success] = [flash_updated, flash_created].reject(&:blank?).join(' ')
+    end
   end
 end

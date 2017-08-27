@@ -98,6 +98,31 @@ class ShortUrl < ApplicationRecord
         !mock.errors.has_key?(attr)
       end
     end
+
+        # Batch updates short URL redirects. Returns array of short URLs that could not be updated.
+    def batch_update_redirects(batch)
+      failed_updates = []
+      batch.each do |short_url_to_update|
+        short_url = ShortUrl.find_by(slug: short_url_to_update[:slug])
+        short_url.redirect = short_url_to_update[:redirect]
+        unless short_url.save
+          failed_updates << short_url_to_update
+        end
+        return failed_updates
+      end
+    end
+
+    # Batch creates short URLs. Returns array of short URLs that could not be created.
+    def batch_create(batch)
+      failed_creates = []
+      batch.each do |short_url_to_create|
+        short_url = ShortUrl.new(slug: short_url_to_create[:slug], redirect: short_url_to_create[:redirect])
+        unless short_url.save
+          failed_creates << short_url_to_create
+        end
+        return failed_creates
+      end
+    end
   end
 
 
