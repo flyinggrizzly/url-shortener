@@ -76,7 +76,11 @@ RSpec.describe ShortUrl, type: :model do
   end
 
   describe 'redirect' do
-    it 'should be a valid URL'
+    it 'should be a valid URL' do
+      short_url = ShortUrl.create(short_url_params(redirect: 'foo'))
+      expect(short_url).not_to be_valid
+    end
+
     it 'should have a scheme when saved'
     it 'cannot redirect to the app host'
   end
