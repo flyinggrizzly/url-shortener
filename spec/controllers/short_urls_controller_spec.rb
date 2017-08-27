@@ -36,7 +36,14 @@ RSpec.describe ShortUrlsController, type: :controller do
   end
 
   describe '#batch_update_and_create' do
-    describe
+    context 'when there are no errors in the short URLs' do
+      it 'lists the short URLs edited and created in the flash'
+    end
+
+    context 'when there are errors in the short URLs' do
+      it 'modifies the @updates attribute with the short URLs that still need to be updated'
+      it 'modifies the @creates attribute with the short URLs that still need to be created'
+    end
   end
 
   describe '#identify_action_for_record(records)' do
