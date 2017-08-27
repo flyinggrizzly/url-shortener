@@ -88,41 +88,6 @@ class ShortUrl < ApplicationRecord
       base_37_alphabet = %w[0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z -]
       number.b(10).to_s(base_37_alphabet)
     end
-
-    # Validates a single attribute
-    def valid_attribute?(attr, value)
-      mock = self.new(attr => value)
-      if mock.valid?
-        true
-      else
-        !mock.errors.has_key?(attr)
-      end
-    end
-
-        # Batch updates short URL redirects. Returns array of short URLs that could not be updated.
-    def batch_update_redirects(batch)
-      failed_updates = []
-      batch.each do |short_url_to_update|
-        short_url = ShortUrl.find_by(slug: short_url_to_update[:slug])
-        short_url.redirect = short_url_to_update[:redirect]
-        unless short_url.save
-          failed_updates << short_url_to_update
-        end
-        return failed_updates
-      end
-    end
-
-    # Batch creates short URLs. Returns array of short URLs that could not be created.
-    def batch_create(batch)
-      failed_creates = []
-      batch.each do |short_url_to_create|
-        short_url = ShortUrl.new(slug: short_url_to_create[:slug], redirect: short_url_to_create[:redirect])
-        unless short_url.save
-          failed_creates << short_url_to_create
-        end
-        return failed_creates
-      end
-    end
   end
 
 
