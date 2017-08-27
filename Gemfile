@@ -63,6 +63,7 @@ group :development, :test do
   gem 'guard-minitest',           '~> 2.4.4'
   gem 'faker',                    '~> 1.6.6'
   gem 'rspec-rails',              '~> 3.6.0'
+  gem 'factory_girl_rails',       '~> 4.8.0'
 end
 
 group :development do
