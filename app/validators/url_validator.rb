@@ -1,5 +1,7 @@
 # Validates URLs
 class UrlValidator < ActiveModel::EachValidator
+  require 'addressable'
+
   def validate_each(record, attribute, value)
     return if validate_url(value)
     record.errors.add(attribute, (options[:message] || :url_format))
@@ -8,9 +10,14 @@ class UrlValidator < ActiveModel::EachValidator
   private
 
   def validate_url(value)
-    url = URI.parse(value)
-    return true if url.scheme.nil?
-    url.scheme.in?(%w[http https])
+    url = Addressable::URI.heuristic_parse(value)
+    # host = url.host
+    return false if url.host.nil?
+    if url.host.match(/^(([a-z0-9][a-z0-9\-]+\.)+)?([a-z0-9][a-z0-9\-]+\.[a-z]{2,})$/i)
+      return true
+    else
+      return false
+    end
   rescue URI::InvalidURIError
     false
   end

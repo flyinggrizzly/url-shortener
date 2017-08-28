@@ -11,35 +11,35 @@ RSpec.describe ShortUrl, type: :model do
   end
 
   it 'is valid with a slug and a redirect' do
-    short_url = ShortUrl.new(short_url_params)
+    short_url = FactoryGirl.build(:short_url)
     expect(short_url).to be_valid
   end
 
   it 'is invalid without a slug' do
-    short_url = ShortUrl.new(short_url_params(slug: ''))
+    short_url = FactoryGirl.build(:short_url, slug: '')
     expect(short_url).not_to be_valid
   end
 
   it 'is invalid without a redirect' do 
-    short_url = ShortUrl.new(short_url_params(redirect: ''))
+    short_url = FactoryGirl.build(:short_url, redirect: '')
     expect(short_url).not_to be_valid
   end
 
   it 'is invalid with a duplicate slug' do
-    ShortUrl.create(short_url_params)
-    short_url = ShortUrl.new(short_url_params)
+    FactoryGirl.create(:short_url, slug: 'same')
+    short_url = FactoryGirl.build(:short_url, slug: 'same')
     expect(short_url).not_to be_valid
   end
 
   it 'has a papertrail', versioning: true, aggregate_failures: true do
-    short_url = ShortUrl.create(short_url_params)
+    short_url = FactoryGirl.create(:short_url)
     short_url.update_attribute(:redirect, 'http://flyinggrizzly.io')
     short_url.update_attribute(:redirect, 'https://www.google.com')
     expect(short_url.versions.length).to eq(3)
   end
 
   it 'has many hits', :aggregate_failures do
-    short_url = ShortUrl.create(short_url_params)
+    short_url = FactoryGirl.create(:short_url)
     expect(short_url).to respond_to(:hits)
     expect(short_url.hits.count).to eq(0)
 
@@ -48,62 +48,69 @@ RSpec.describe ShortUrl, type: :model do
   end
 
   it 'should use its slug as the param' do
-    short_url = ShortUrl.create(short_url_params)
+    short_url = FactoryGirl.create(:short_url)
     expect(short_url.to_param).to eq(short_url.slug)
   end
 
   describe 'slug' do
     it "is only valid with a-z, 0-9, and '-'", :aggregate_failures do
-      common_bad_single_char_slugs = %w(! @ # $ % £ ^ & * _ + = [ ] \ | / ? . > , < ` ~  ; : { } )
+      common_bad_single_char_slugs = %w(! @ # $ % £ ^ & * _ + = [ ] \ | / ? . > , < ` ~  ; : { } \( \))
       common_bad_single_char_slugs.each do |slug|
-        short_url = ShortUrl.new(short_url_params(slug: slug))
+        short_url = FactoryGirl.build(:short_url, slug: slug)
         expect(short_url).not_to be_valid
       end
 
       slug_with_all_allowed_chars = '1234567890-abcdefghijklmnopqrstuvwxyz'
-      short_url = ShortUrl.new(short_url_params(slug: slug_with_all_allowed_chars))
+      short_url = FactoryGirl.build(:short_url, slug: slug_with_all_allowed_chars)
       expect(short_url).to be_valid
     end
 
     it 'cannot be a reserved slug', :aggregate_failures do
       UrlGrey::Application.config.reserved_slugs.each do |slug|
-        short_url = ShortUrl.new(short_url_params(slug: slug))
+        short_url = FactoryGirl.build(:short_url, slug: slug)
         expect(short_url).not_to be_valid
       end
     end
 
     it 'should be 255 characters or less', :aggregate_failures do
       slug = 'a' * 255
-      short_url = ShortUrl.new(short_url_params(slug: slug))
+      short_url = FactoryGirl.build(:short_url, slug: slug)
       expect(short_url).to be_valid
 
       slug << 'a'
-      short_url = ShortUrl.new(short_url_params(slug: slug))
+      short_url = FactoryGirl.build(:short_url, slug: slug)
       expect(short_url).not_to be_valid
     end
   end
 
   describe 'redirect' do
-    it 'should be a valid URL', :aggregate_failures do
-      pending "need to fix URL validation"
-      short_url = ShortUrl.new(short_url_params(redirect: 'foo'))
+    it 'should reject URIs that do not resolve to valid hosts' do
+      # pending "need to fix URL validation"
+      short_url = FactoryGirl.build(:short_url, redirect: 'foo bar')
       expect(short_url).not_to be_valid
+    end
 
-      short_url = ShortUrl.new(short_url_params(slug: 'bar', redirect: 'https://www,flyinggrizzly.io'))
+    it 'should reject URIs with commas' do
+      short_url = FactoryGirl.build(:short_url, redirect: 'http://www,flyinggrizzly.io')
+      expect(short_url).not_to be_valid
+    end
+
+    it 'should reject URIs that begin with hyphens' do
+      short_url = FactoryGirl.build(:short_url, redirect: 'https://www.-cantstartwith.hyphen')
       expect(short_url).not_to be_valid
     end
 
     it 'should have a scheme when saved' do
-      short_url = ShortUrl.create(short_url_params(redirect: 'www.flyinggrizzly.io'))
+      short_url = FactoryGirl.create(:short_url, redirect: 'www.flyinggrizzly.io')
       expect(short_url.reload.redirect).to eq('http://www.flyinggrizzly.io')
     end
 
     it 'cannot redirect to the app host' do
-      # Put application host into a temporary var for safekeeping
+      # Put application host into a temporary variable for safekeeping
       app_host = UrlGrey::Application.config.application_host
 
       UrlGrey::Application.config.application_host = 'https://grz.li'
-      short_url = ShortUrl.new(short_url_params(redirect: 'https://grz.li/foo'))
+      short_url = FactoryGirl.build(:short_url, redirect: 'https://grz.li/foo')
       expect(short_url).not_to be_valid
 
       # Restore the application host value
@@ -113,7 +120,7 @@ RSpec.describe ShortUrl, type: :model do
 
   describe 'papertrail', versioning: true do
     it 'should record old redirect targets', aggregate_failures: true do
-      short_url = ShortUrl.create(slug: 'slug', redirect: 'https://site-0.com')
+      short_url = FactoryGirl.create(:short_url, slug: 'slug', redirect: 'https://site-0.com')
       3.times do |n|
         short_url.redirect = "https://site-#{n + 1}.com"
         short_url.save
@@ -179,8 +186,10 @@ RSpec.describe ShortUrl, type: :model do
     end
 
     it 'should not return a slug that is already in use' do
-      ShortUrl.create(slug: ShortUrl.random_slug, redirect: 'https://www.flyinggrizzly.io')
-      short_url = ShortUrl.new(slug: ShortUrl.random_slug, redirect: 'https://www.flyinggrizzly.io')
+      FactoryGirl.create(:short_url, slug: ShortUrl.random_slug, redirect: 'https://www.flyinggrizzly.io')
+      # Decrement the current random slug counter to test that it auto-increments when there is a collision 
+      AppConfig.current_random_slug -= 1
+      short_url = FactoryGirl.build(:short_url, slug: ShortUrl.random_slug, redirect: 'https://www.flyinggrizzly.io')
       expect(short_url).to be_valid
     end
 
