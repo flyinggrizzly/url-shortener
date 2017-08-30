@@ -1,5 +1,11 @@
 # Url Grey changelog
 
+## v 0.4.0
+
+- batch update and creation of short URLs at `/short-urls/batch`
+- refactor tests to use RSpec
+- fix URL validation that was allowing `foo bar` as a valid URI
+
 ## v 0.3.0
 
 - normal users can create and display short urls
