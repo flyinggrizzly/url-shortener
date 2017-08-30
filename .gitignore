@@ -6,7 +6,6 @@
 
 # Ignore local files
 **/.DS_Store
-todo.md
 
 # Ignore bundler config.
 /.bundle
