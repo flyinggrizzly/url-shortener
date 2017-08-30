@@ -4,7 +4,7 @@ require 'csv'
 RSpec.feature "ShortUrls", type: :feature do
 
   before(batch_test: true) do
-    CSV.read('spec/misc/batch.csv').each do |slug, redirect|
+    CSV.read('spec/support/files/batch.csv').each do |slug, redirect|
       next unless slug.include? 'pre-exists'
       FactoryGirl.create(:short_url, slug: slug, redirect: redirect)
     end
@@ -29,14 +29,14 @@ RSpec.feature "ShortUrls", type: :feature do
 
     click_link   'Create a Short URL'
     click_link   'Batch update and create'
-    attach_file  'short_urls_csv', 'spec/misc/batch.csv'
+    attach_file  'short_urls_csv', 'spec/support/files/batch.csv'
     click_button 'Create short URLs'
 
     # track slugs being updated and created to test success in a minute
     updated_slugs = []; created_slugs = []
 
     # Expect each of the entries in the CSV to be present in the form...
-    CSV.read('spec/misc/batch.csv').each do |slug, redirect|
+    CSV.read('spec/support/files/batch.csv').each do |slug, redirect|
       # ... those that need to be updated
       if slug.include? 'pre-exists'
         updated_slugs << "'#{slug}'"

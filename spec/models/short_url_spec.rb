@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ShortUrl, type: :model do
-  
+
   it 'has a valid factory' do
     expect(FactoryGirl.build(:short_url)).to be_valid
   end

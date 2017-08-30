@@ -7,6 +7,8 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'paper_trail/frameworks/rspec'
 require 'capybara/rspec'
+# Require spec helpers
+Dir["./spec/support/helpers/*.rb"].sort.each { |f| require f }
 include ApplicationHelper
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -60,4 +62,7 @@ RSpec.configure do |config|
 
   # Enable testing with anonymous controllers for concern specs
   config.infer_base_class_for_anonymous_controllers = true
+
+  # Include the sessions helper for controller tests
+  config.include SessionHelper
 end
