@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  concern :batchable do
+    collection do
+      get  :batch
+      post :batch, action: :batch_edit_and_new
+      put  :batch_update_and_create
+    end
+  end
+
   # Route '/' to a 'root' action which will check app config to either
   ## redirect it as a custom short URL, or render the home page.
   root 'application#root'
@@ -8,11 +16,9 @@ Rails.application.routes.draw do
 
   scope '/admin' do
     resources :users
-    # Expose screen for creating many short URLs
-    get 'short-urls/many-new', to: 'short_urls#many_new'
 
     # Use short URL slug as id in URL
-    resources :short_urls, param: :slug, path: 'short-urls' do
+    resources :short_urls, param: :slug, path: 'short-urls', concerns: :batchable do
       get 'search', on: :collection
     end
   end

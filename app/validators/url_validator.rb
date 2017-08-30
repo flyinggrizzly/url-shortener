@@ -13,11 +13,7 @@ class UrlValidator < ActiveModel::EachValidator
     url = Addressable::URI.heuristic_parse(value)
     # host = url.host
     return false if url.host.nil?
-    if url.host.match(/^(([a-z0-9][a-z0-9\-]+\.)+)?([a-z0-9][a-z0-9\-]+\.[a-z]{2,})$/i)
-      return true
-    else
-      return false
-    end
+    return url.host.match(/^(([a-z0-9][a-z0-9\-]+\.)+)?([a-z0-9][a-z0-9\-]+\.[a-z]{2,})$/i)
   rescue URI::InvalidURIError
     false
   end

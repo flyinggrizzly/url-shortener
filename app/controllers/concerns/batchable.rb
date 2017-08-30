@@ -30,7 +30,7 @@ module Batchable
     short_urls_to_update = params[:short_urls_to_update]
     short_urls_to_create = params[:short_urls_to_create]
 
-    if short_urls_to_update.empty? && short_urls_to_create.empty?
+    if (short_urls_to_update.nil? || short_urls_to_update.empty?) && (short_urls_to_create.empty? || short_urls_to_create.nil?)
       flash[:danger] = 'Could not read CSV.'
       render 'batch'
     else
@@ -69,7 +69,7 @@ module Batchable
     end
 
     # Set up the flash
-    if @updates.empty? && @creates.empty?
+    if (@updates.nil? || @updates.empty?) && (@creates.empty? || @creates.nil?)
       # If we have no more short URLs to work with, everything was a success
       batch_operation_flash(updated_slugs_to_flash, created_slugs_to_flash)
       redirect_to short_urls_path
@@ -108,11 +108,9 @@ module Batchable
   # Reads and parses CSV for batch operation
   def read_batch_csv
     # TODO: error handling
-    csv_lines = CSV.read(Rails.root.join('public', 'uploads', upload))
-
     short_urls = []
-    csv_lines.each do |line|
-      short_urls << {slug: line[0], redirect: line[1]}
+    CSV.read(Rails.root.join('public', 'uploads', upload)).each do |slug, redirect|
+      short_urls << {slug: slug, redirect: redirect}
     end
     delete_csv(upload)
     return short_urls

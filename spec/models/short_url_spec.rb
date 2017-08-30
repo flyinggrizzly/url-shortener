@@ -1,11 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ShortUrl, type: :model do
-
-  def short_url_params(slug: 'slug', redirect: 'https://www.flyinggrizzly.io')
-    { slug: slug, redirect: redirect }
-  end
-
+  
   it 'has a valid factory' do
     expect(FactoryGirl.build(:short_url)).to be_valid
   end
