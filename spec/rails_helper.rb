@@ -65,4 +65,5 @@ RSpec.configure do |config|
 
   # Include the sessions helper for controller tests
   config.include SessionHelper
+  config.include InteractionsHelper
 end

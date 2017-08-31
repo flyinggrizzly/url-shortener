@@ -54,13 +54,4 @@ RSpec.describe UrlValidator do
       expect(object).to be_valid
     end
   end
-
-  context 'when passed a valid ip address' do
-    pending 'need to fix the edge case where redirects to IP addresses are created'
-    it 'accepts the address with a scheme'
-    it 'accepts the address without a scheme'
-    it 'accepts the address with a port'
-    it 'accepts the address with a scheme and a port'
-    it 'accepts the address without a scheme, but with a port'
-  end
 end

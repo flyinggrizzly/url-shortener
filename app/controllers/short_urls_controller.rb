@@ -6,7 +6,9 @@ class ShortUrlsController < ApplicationController
                                           :update,
                                           :delete,
                                           :destroy,
-                                          :many_new]
+                                          :batch,
+                                          :batch_edit_and_new,
+                                          :batch_create_and_update]
 
   def index
     @short_urls = ShortUrl.paginate(page: params[:page])
