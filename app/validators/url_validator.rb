@@ -10,6 +10,7 @@ class UrlValidator < ActiveModel::EachValidator
   private
 
   def validate_url(value)
+    return false if value.blank?
     url = Addressable::URI.heuristic_parse(value)
     # host = url.host
     return false if url.host.nil?
