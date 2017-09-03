@@ -13,7 +13,7 @@ module Batchable
     if short_urls = read_batch_csv
       @updates, @creates = identify_action_for_record(short_urls)
     else
-      # render a flash with problems
+      flash[:danger] = 'That CSV could not be read.'
       render 'batch'
     end
   end
@@ -107,13 +107,20 @@ module Batchable
 
   # Reads and parses CSV for batch operation
   def read_batch_csv
-    # TODO: error handling
+    csv = CSV.read(Rails.root.join('public', 'uploads', upload))
+    number_of_malformed_rows = 0
+    csv.each do |row|
+      number_of_malformed_rows += 1 if row.size != 2
+    end
+    raise CSV::MalformedCSVError if number_of_malformed_rows >= csv.size
     short_urls = []
-    CSV.read(Rails.root.join('public', 'uploads', upload)).each do |slug, redirect|
+    csv.each do |slug, redirect|
       short_urls << {slug: slug, redirect: redirect}
     end
     delete_csv(upload)
     return short_urls
+  rescue
+    return
   end
 
   # Deletes CSV upload

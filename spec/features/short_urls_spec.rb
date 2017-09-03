@@ -171,6 +171,7 @@ RSpec.feature "ShortUrls", type: :feature do
       click_link   'Batch update and create'
       attach_file  'short_urls_csv', "spec/support/files/#{csv_name}"
       click_button 'Create short URLs'
+      save_page
 
       # track slugs being updated and created to test success in a minute
       updated_urls, created_urls = identify_urls_to_update_and_create(csv_name)
@@ -202,6 +203,21 @@ RSpec.feature "ShortUrls", type: :feature do
 
       expect(page).to have_content("Your short URLs had some problems. Please fix these.")
       expect(page).to have_css('.error_explanation ul li.error-item', count: 5) # the '  ' URL submitted triggers two errors: blankness, and URL validity
+    end
+
+    scenario 'admin tries to upload an empty file' do
+      csv_name = 'batch_empty.csv'.freeze
+
+      visit root_or_admin_path
+      click_link   'Log in'
+      fill_in_login_details_and_log_in_as(@admin)
+
+      click_link   'Create a Short URL'
+      click_link   'Batch update and create'
+      attach_file  'short_urls_csv', "spec/support/files/#{csv_name}"
+      click_button 'Create short URLs'
+
+      expect(page).to have_content('That CSV could not be read.')
     end
 
     scenario 'user tries to access the batch screen and is redirected to the short URLs index' do
