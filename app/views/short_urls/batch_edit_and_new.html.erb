@@ -1,0 +1,61 @@
+<%= provide(:title, 'Confirm your batch short URL update') %>
+
+<div class="column">
+  <h2>Confirm changes and creations of short URLs</h2>
+
+  <p>These are lists of all the short URLs you have uploaded. The first list is of short URLs that <em>already exist</em> whose redirects will be changed; the second is the list of short URLs that will be created.</p>
+
+  <%= form_tag batch_update_and_create_short_urls_path, method: :put do %>
+    <fieldset class="fieldset" id="short-urls-to-update">
+      <legend>Short URLs to update</legend>
+      <ul>
+        <% @updates.each do |url| %>
+          <li class="short_url short_urls">
+            <%= fields_for "short_urls_to_update[]", url do |f| %>
+              <% if url.errors.any? %>
+                <div class="error_explanation">
+                  <ul>
+                    <% url.errors.full_messages.each do |msg| %>
+                      <li class="error-item"><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div><!-- end .error_explanation -->
+              <% end %>
+              <span><strong><%= url.slug %></strong></span>
+              <%= f.hidden_field :slug %>
+              <%= f.label :redirect, 'Redirecting to' %>
+              <%= f.url_field :redirect, value: url.redirect %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </fieldset>
+
+    <fieldset class="fieldset short_urls" id="short-urls-to-create">
+      <legend>Short URLs to create</legend>
+      <ul>
+        <% @creates.each do |url| %>
+          <li class="short_url short_urls">
+            <%= fields_for "short_urls_to_create[]", url do |f| %>
+              <% if url.errors.any? %>
+                <div class="error_explanation">
+                  <ul>
+                    <% url.errors.full_messages.each do |msg| %>
+                      <li class="error-item"><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div><!-- end .error_explanation -->
+              <% end %>
+              <%= f.label :slug %>
+              <%= f.text_field :slug %>
+              <%= f.label :redirect %>
+              <%= f.text_field :redirect %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </fieldset>
+
+    <%= submit_tag "Submit short URLs for update and creation", class: 'button' %>
+  <% end %>
+</div><!-- end .column -->

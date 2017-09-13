@@ -22,6 +22,9 @@ module UrlGrey
     # Set random slug default length
     config.random_slug_length = 4
 
+    # add a view directory for the anonymous controller tests
+    config.paths['app/views'] << "spec/support/test_views" if Rails.env.test?
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

@@ -6,7 +6,6 @@
 
 # Ignore local files
 **/.DS_Store
-todo.md
 
 # Ignore bundler config.
 /.bundle
@@ -27,6 +26,9 @@ todo.md
 
 # Ignore test coverage checks
 coverage/*
+
+# Ignore uploads
+public/uploads/*
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

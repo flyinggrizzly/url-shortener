@@ -7,7 +7,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     @other_user = users(:yig)
   end
 
-  test "should get new" do
+  test 'should get new' do
     log_in_as(@admin)
     get new_user_path
     assert_response :success

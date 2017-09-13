@@ -27,7 +27,7 @@
   }
 }
 .short_url {
-  padding: 20px;
+  padding-bottom: 10px;
   margin-bottom: 20px;
   border-bottom: 1px solid lightgrey;
   .menu li h5 a {
@@ -37,9 +37,9 @@
       text-decoration: underline;
     }
   }
-  .button {
-    margin-right: 10px;
-  }
+}
+.button {
+  margin-right: 10px;
 }
 ul.short_url--edit.short_url.menu {
   padding-left: 0 !important;
@@ -65,9 +65,12 @@ ul.short_url--edit.short_url.menu {
 }
 
 .create_url {
-  background-color: #7EA943;
   font-weight: 600;
   font-size: 1.8rem !important;
+}
+
+.button--cta {
+  background-color: #7EA943;
 }
 
 .short-url-stats {

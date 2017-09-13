@@ -1,6 +1,14 @@
 class ShortUrlsController < ApplicationController
+  include Batchable
+
   before_action :logged_in_user, except: [:search]
-  before_action :admin_user,     only:   [:edit, :update, :delete, :destroy]
+  before_action :admin_user,     only:   [:edit,
+                                          :update,
+                                          :delete,
+                                          :destroy,
+                                          :batch,
+                                          :batch_edit_and_new,
+                                          :batch_create_and_update]
 
   def index
     @short_urls = ShortUrl.paginate(page: params[:page])
@@ -11,7 +19,12 @@ class ShortUrlsController < ApplicationController
   end
 
   def show
-    @short_url = ShortUrl.find_by(slug: params[:slug])
+    if @short_url = ShortUrl.find_by(slug: params[:slug])
+      @short_url
+    else
+      flash[:warn] = 'That short URL does not exist.'
+      redirect_to root_or_admin_url
+    end
   end
 
   def new

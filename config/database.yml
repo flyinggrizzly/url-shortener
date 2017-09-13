@@ -17,7 +17,7 @@
 default: &default
   host: localhost
   username: url_shortener_user
-  password: <%= ENV['URL_SHORTENER_DB_PASSWORD'] %>
+  password: s2398rjngfyeur8923h
   adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide

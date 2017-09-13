@@ -1,19 +1,21 @@
 <% provide(:title, 'Short URLs') %>
 
-<h1>All Short URLs</h1>
+<div class="column small-8 small-offset-2">
+  <h1>All Short URLs</h1>
 
-<%= render 'short_urls/create_button' %>
+  <%= render 'short_urls/create_button' %>
 
-<div>
-  <%= render partial: 'shared/url_search_form' %>
+  <div>
+    <%= render partial: 'shared/url_search_form' %>
+  </div>
+
+  <section class="short_urls">
+    <%= will_paginate class: 'text-center pagination' %>
+    <ul>
+      <% @short_urls.each do |short_url| %>
+        <%= render partial: short_url, short_url: short_url %>
+      <% end %>
+    </ul>
+    <%= will_paginate class: 'text-center pagination' %>
+  </section>
 </div>
-
-<section class="short_urls column">
-  <%= will_paginate class: 'text-center pagination' %>
-  <ul>
-    <% @short_urls.each do |short_url| %>
-      <%= render partial: short_url, short_url: short_url %>
-    <% end %>
-  </ul>
-  <%= will_paginate class: 'text-center pagination' %>
-</section>

@@ -36,8 +36,6 @@ class ShortUrl < ApplicationRecord
                         url:           true,
                         safe_redirect: true
 
-
-
   ###### Public methods ########################
 
   # Sets up short URL slugs to be used as params in routing
