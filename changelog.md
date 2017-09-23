@@ -1,5 +1,9 @@
 # Url Grey changelog
 
+## v 0.3.1
+
+- update gems to fix [Nokogiri CVE-2017-9050](https://github.com/sparklemotion/nokogiri/issues/1673) as [raised by Hakiri](https://hakiri.io/projects/570308c3e1bc06/stacks/b4c647e4e04ef8/builds/ae1bb738e5f2b2/warnings?name=Denial+of+Service)
+
 ## v 0.3.0
 
 - normal users can create and display short urls
