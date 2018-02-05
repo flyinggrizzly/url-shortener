@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails',                    '~> 5.1.1'
 # Fix version of Bundler
-gem 'bundler',                  '~> 1.15.0'
+gem 'bundler',                  '~> 1.15'
 # Use postgresql as the database for Active Record
 gem 'pg',                       '~> 0.18'
 # Use bcrypt for passwords and security
@@ -62,6 +62,7 @@ group :development, :test do
   gem 'guard',                    '~> 2.13.0'
   gem 'guard-minitest',           '~> 2.4.4'
   gem 'faker',                    '~> 1.6.6'
+  gem 'dotenv'
 end
 
 group :development do

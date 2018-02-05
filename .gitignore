@@ -10,6 +10,7 @@ todo.md
 
 # Ignore bundler config.
 /.bundle
+.env
 
 # Ignore all logfiles and tempfiles.
 /log/*
